@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Наша команда | chvrtk.ru</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5em;
+            margin-top: 2em;
+        }
+
+        .team-member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1.2em;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .team-member h3 {
+            margin-bottom: 0.4em;
+            font-size: 1.3em;
+        }
+
+        .team-member p {
+            margin: 0;
+            color: #bbb;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Career CTA */
+        #career-cta {
+            background: #0a0a0a;
+            color: white;
+            text-align: center;
+            padding: 4em 1em;
+        }
+
+        #career-cta a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        #career-cta .domain {
+            font-size: 2.8em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 0;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #career-cta .subtitle {
+            font-size: 1.2em;
+            margin-top: 0.8em;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Join CTA */
+        #join-team {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            text-align: center;
+            padding: 4em 1em;
+            color: white;
+        }
+
+        #join-team h2 {
+            font-size: 2.2em;
+            margin-bottom: 1em;
+        }
+
+        #join-team p {
+            max-width: 600px;
+            margin: 0 auto 2em;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        #join-team .button {
+            font-weight: 600;
+            border-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <!-- Mobile Topbar -->
+    <div id="mobileTopbar">
+        <div class="scroll-container">
+            <a href="speaking-lab.html">speaking lab</a>
+            <a href="individual.html">individual</a>
+            <a href="index.html" class="center-btn">chvrtk.ru</a>
+            <a href="events.html">events</a>
+            <a href="ielts.html">ielts</a>
+            <a href="team.html">Team</a>
+            <!-- <a href="about.html">about</a> -->
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <div class="brand">
+                <a href="index.html"><h2>chvrtk</h2></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#intro" class="scrolly">Команда</a></li>
+                    <li><a href="#core-team" class="scrolly">Преподаватели</a></li>
+                    <li><a href="#events-team" class="scrolly">Events</a></li>
+                    <li><a href="#join-team" class="scrolly">Присоединиться</a></li>
+                    <li><a href="#career-cta" class="scrolly">Карьера</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <div id="wrapper">
+
+        <!-- Intro -->
+        <section id="intro" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h1>Наша команда</h1>
+                <p><strong>Люди — наше главное преимущество.</strong><br>
+                Преподаватели, организаторы, наставники — все они создают среду,<br>
+                в которой студенты не просто учат английский, а становятся частью международного сообщества.<br>
+                <em>Каждый здесь — эксперт. Каждый — видим.</em></p>
+            </div>
+        </section>
+
+        <!-- Преподаватели -->
+        <section id="core-team" class="wrapper style3 fade-up">
+            <div class="inner">
+                <h2>Преподаватели</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="images/mypicture.JPG" alt="Алексей Четвертак">
+                        <h3>Алексей Четвертак</h3>
+                        <p><strong>Основатель • Автор методики A-E-E-R</strong><br>
+                        Студент ВМК МГУ, IELTS 7.5 (L 9.0).<br>
+                        Готовит к интервью, IELTS и международной карьере с 2021 г.</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="images/anna.jpeg" alt="Анна К.">
+                        <h3>Анна К.</h3>
+                        <p><strong>IELTS 8.5 • Cambridge CELTA</strong><br>
+                        Специализация: магистратура за рубежом.<br>
+                        Опыт преподавания в Лондоне, 5+ лет в профессии.</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="images/mikhail.jpeg" alt="Михаил Т.">
+                        <h3>Михаил Т.</h3>
+                        <p><strong>Ex-разработчик • IELTS 8.0</strong><br>
+                        Готовит IT-специалистов к remote-работе и техническим интервью.<br>
+                        Знает, как говорить на равных с native speakers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Команда Events -->
+        <section id="events-team" class="wrapper style2 fade-up">
+            <div class="inner">
+                <h2>Команда Events</h2>
+                <p>Организуют англоязычную среду вне занятий: Mafia Night, Debate Club, Networking.<br>
+                Принципы: <strong>No Russian • Cameras On • English Only</strong>.</p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="images/daria.jpg" alt="Дарья">
+                        <h3>Дарья</h3>
+                        <p><strong>Куратор Speaking Lab</strong><br>
+                        Организует еженедельные сессии,<br>
+                        следит за атмосферой и прогрессом участников.</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="images/ivan.jpg" alt="Иван">
+                        <h3>Иван</h3>
+                        <p><strong>Ведущий ивентов</strong><br>
+                        Проводит Mafia Night и Debate Club,<br>
+                        создаёт условия для спонтанной речи.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Присоединиться -->
+    <section id="join-team" class="wrapper style1 fade-up" style="background: #0a0a0a; color: white; text-align: center; padding: 4em 1em;">
+        <div class="inner" style="max-width: 700px; margin: 0 auto;">
+            <h2>Хочешь быть здесь?</h2>
+            <p style="font-size: 1.1em; opacity: 0.9; margin: 1.5em 0 2.5em;">
+                Мы ищем сертифицированных преподавателей, организаторов и энтузиастов,<br>
+                которые верят, что английский — это стиль жизни.
+            </p>
+            <a href="https://career.chvrtk.ru" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                <p class="domain" style="
+                    font-size: 2.6em;
+                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                    margin: 0;
+                    line-height: 1.1;
+                    background: linear-gradient(135deg, #fff, #aaa);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                ">career.chvrtk.ru</p>
+                <p class="subtitle" style="font-size: 1.2em; margin-top: 0.8em; color: rgba(255,255,255,0.7);">
+                    Наш карьерный центр
+                </p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; chvrtk.ru</li>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="https://alumni.chvrtk.ru">Alumni</a></li>
+                <li><a href="https://career.chvrtk.ru">Careers</a></li>
+                <li><a href="https://conf.chvrtk.ru">Events</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        $(window).on('load resize', function() {
+            const isDesktop = window.matchMedia('(min-width: 981px)').matches;
+            const offsetValue = isDesktop ? 0 : $('#sidebar').outerHeight() || 0;
+            $('.scrolly').scrolly({ offset: offsetValue });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.scroll-container');
+            const centerBtn = document.querySelector('.center-btn');
+            if (!container || !centerBtn) return;
+
+            function centerScroll() {
+                const target = centerBtn.offsetLeft + centerBtn.offsetWidth / 2 - container.offsetWidth / 2;
+                const start = container.scrollLeft;
+                const distance = target - start;
+                const duration = 600;
+                let startTime = null;
+
+                function animate(time) {
+                    if (!startTime) startTime = time;
+                    const elapsed = time - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const ease = 0.5 - 0.5 * Math.cos(Math.PI * progress);
+                    container.scrollLeft = start + distance * ease;
+                    if (progress < 1) requestAnimationFrame(animate);
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            let scrollTimeout;
+            container.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(centerScroll, 3000);
+            });
+
+            centerScroll();
+        });
+    </script>
+
+<!-- Пасхалка -->
+<div id="easter-egg" title="Секрет!" style="display:none; cursor:pointer; position:fixed; bottom:20px; right:20px; font-size:28px;">
+    s
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const egg = document.getElementById('easter-egg');
+    let shown = false;
+
+    function checkScroll() {
+        const scrollBottom = window.innerHeight + window.scrollY;
+        const pageHeight = document.body.scrollHeight;
+
+        // показываем только если дошли до конца страницы и еще не показали
+        if (!shown && scrollBottom >= pageHeight - 5) { 
+            shown = true;
+            egg.style.display = 'block';
+        }
+    }
+
+    window.addEventListener('scroll', checkScroll);
+
+    // при клике открываем скрытую страницу
+    egg.addEventListener('click', () => {
+        window.location.href = 'sm1ley.html';
+    });
+});
+</script>
+
+
+
+</body>
+</html>
