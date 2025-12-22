@@ -1,6 +1,3 @@
-полностью исправь код. он выдает мне ошибку отправки:
-
-
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
@@ -989,11 +986,11 @@
             const url = `${CHVRTK_CONFIG.API_BASE_URL}/${action}`;
             
             try {
-                // Отправляем запрос
+                // Отправляем запрос (ИСПРАВЛЕННЫЙ КОД)
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
+                        'Content-Type': 'application/json' // ← ВОТ ЭТО НУЖНО!
                     },
                     body: JSON.stringify(data)
                 });
