@@ -880,418 +880,176 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 
-<!-- CHVRTK Form Handler (Fully Fixed) -->
 <script>
     // ====================================================================
-    // CHVRTK FORM HANDLER v4.0 (Полностью исправленный)
+    // CHVRTK FORM HANDLER v5.0 (Simplified & Working)
     // ====================================================================
     
-    // КОНФИГУРАЦИЯ
-    const CHVRTK_CONFIG = {
-        API_BASE_URL: 'https://d5d34ggl6saovpdajhps.a6hc9vya.apigw.yandexcloud.net',
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализируем формы
+        initForms();
+        initProgressBars();
+        initFakeCountdown();
+        console.log('✅ Формы инициализированы');
+    });
+    
+    function initForms() {
+        const forms = document.querySelectorAll('.lead-form-js');
         
-        ENDPOINTS: {
-            HERO: 'submit-hero',
-            FINAL: 'submit-final'
-        },
-        
-        YANDEX_METRICA_ID: 96567843
-    };
-
-    class ChvrtkFormHandler {
-        constructor() {
-            this.init();
-        }
-        
-        init() {
-            // Инициализируем формы
-            this.initForms();
-            
-            // Инициализируем фейковый таймер
-            this.initFakeCountdown();
-            
-            // Инициализируем прогресс-бары
-            this.initProgressBars();
-            
-            console.log('✅ CHVRTK Form Handler v4.0 initialized');
-        }
-        
-        initForms() {
-            const forms = document.querySelectorAll('.lead-form-js');
-            
-            forms.forEach(form => {
-                // Устанавливаем обработчик отправки
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleSubmit(form);
-                });
-                
-                // Устанавливаем аналитические поля
-                this.setAnalyticsFields(form);
-                
-                // Устанавливаем валидацию на лету
-                this.setupFieldValidation(form);
+        forms.forEach(form => {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                await handleFormSubmit(form);
             });
-        }
+        });
+    }
+    
+    async function handleFormSubmit(form) {
+        // Получаем данные формы
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
         
-        setupFieldValidation(form) {
-            const inputs = form.querySelectorAll('input, select');
-            
-            inputs.forEach(input => {
-                // Валидация при потере фокуса
-                input.addEventListener('blur', () => {
-                    this.validateField(input);
-                });
-                
-                // Визуальная обратная связь при вводе
-                input.addEventListener('input', () => {
-                    this.clearFieldError(input);
-                    if (input.value.trim()) {
-                        this.markValid(input);
-                    } else {
-                        this.clearFieldStatus(input);
-                    }
-                });
-                
-                // Визуальная обратная связь при изменении селекта
-                if (input.tagName === 'SELECT') {
-                    input.addEventListener('change', () => {
-                        this.validateField(input);
-                    });
-                }
-            });
-        }
+        // Определяем endpoint
+        const isHeroForm = form.id === 'hero-lead-form';
+        const endpoint = isHeroForm ? 'submit-hero' : 'submit-final';
         
-        async handleSubmit(form) {
-            // Валидируем форму
-            if (!this.validateForm(form)) {
-                this.showError(form, 'Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-            
-            // Получаем данные формы
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Показываем загрузку
-            const submitBtn = form.querySelector('button[type="submit"]');
-            this.setLoading(submitBtn, true);
-            
-            // Определяем endpoint (оставляем как есть)
-            const action = form.id.includes('hero') 
-                ? CHVRTK_CONFIG.ENDPOINTS.HERO 
-                : CHVRTK_CONFIG.ENDPOINTS.FINAL;
-
-            // Формируем URL (НОВЫЙ СПОСОБ - путь в URL)
-            const url = `${CHVRTK_CONFIG.API_BASE_URL}/${action}`;
-            
-            try {
-                // Отправляем запрос (ИСПРАВЛЕННЫЙ КОД)
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json' // ← ВОТ ЭТО НУЖНО!
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                const textResult = await response.text();
-                let result;
-                
-                try {
-                    result = JSON.parse(textResult);
-                } catch (e) {
-                    console.error('JSON Parse Error:', e);
-                    result = { 
-                        success: false, 
-                        message: 'Ошибка сервера. Попробуйте позже.' 
-                    };
-                }
-                
-                if (result.success) {
-                    // Успех
-                    this.showSuccess(form);
-                    this.sendAnalytics(form.id);
-                    
-                    // Сбрасываем форму через 5 секунд
-                    setTimeout(() => {
-                        form.reset();
-                        this.hideMessage(form);
-                        // Сбрасываем статусы полей
-                        form.querySelectorAll('input, select').forEach(field => {
-                            this.clearFieldStatus(field);
-                        });
-                    }, 5000);
-                    
-                } else {
-                    // Ошибка
-                    this.showError(form, result.message || 'Ошибка отправки');
-                }
-                
-            } catch (error) {
-                console.error('Network Error:', error);
-                this.showError(form, 'Ошибка сети. Попробуйте ещё раз');
-                
-            } finally {
-                this.setLoading(submitBtn, false);
-            }
-        }
+        // Показываем загрузку
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
         
-        validateForm(form) {
-            let isValid = true;
-            
-            // Проверяем обязательные поля
-            const requiredFields = form.querySelectorAll('[required]');
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    this.markInvalid(field, 'Это поле обязательно');
-                    isValid = false;
-                } else {
-                    // Если поле заполнено, проверяем email
-                    if (field.type === 'email' && field.value.trim()) {
-                        if (!this.validateEmail(field.value)) {
-                            this.markInvalid(field, 'Введите корректный email');
-                            isValid = false;
-                        }
-                    }
-                }
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        submitBtn.disabled = true;
+        
+        try {
+            // Отправляем запрос
+            const response = await fetch(`https://d5d34ggl6saovpdajhps.a6hc9vya.apigw.yandexcloud.net/${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             });
             
-            return isValid;
-        }
-        
-        validateField(field) {
-            const type = field.type || field.getAttribute('data-validate');
+            const result = await response.json();
             
-            if (field.hasAttribute('required') && !field.value.trim()) {
-                this.markInvalid(field, 'Это поле обязательно');
-                return false;
-            }
-            
-            if (!field.value.trim()) {
-                this.clearFieldStatus(field);
-                return true;
-            }
-            
-            if (type === 'email' || field.type === 'email') {
-                if (!this.validateEmail(field.value)) {
-                    this.markInvalid(field, 'Введите корректный email');
-                    return false;
-                }
-            }
-            
-            this.markValid(field);
-            return true;
-        }
-        
-        validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-        
-        markInvalid(field, message) {
-            field.classList.add('error');
-            field.classList.remove('valid');
-            
-            const errorElement = field.parentNode.querySelector('.field-error');
-            if (errorElement) {
-                errorElement.textContent = message;
-                errorElement.style.display = 'block';
-            }
-        }
-        
-        markValid(field) {
-            field.classList.remove('error');
-            field.classList.add('valid');
-            
-            const errorElement = field.parentNode.querySelector('.field-error');
-            if (errorElement) {
-                errorElement.style.display = 'none';
-            }
-        }
-        
-        clearFieldError(field) {
-            const errorElement = field.parentNode.querySelector('.field-error');
-            if (errorElement) {
-                errorElement.style.display = 'none';
-            }
-        }
-        
-        clearFieldStatus(field) {
-            field.classList.remove('error', 'valid');
-            this.clearFieldError(field);
-        }
-        
-        setLoading(button, isLoading) {
-            const textSpan = button.querySelector('.btn-text');
-            const loadingSpan = button.querySelector('.btn-loading');
-            
-            if (isLoading) {
-                textSpan.style.display = 'none';
-                loadingSpan.style.display = 'inline';
-                button.disabled = true;
-                button.style.opacity = '0.7';
-                button.style.cursor = 'not-allowed';
+            if (result.success) {
+                // Показываем успех
+                showSuccess(form);
+                console.log('✅ Форма отправлена:', result);
             } else {
-                textSpan.style.display = 'inline';
-                loadingSpan.style.display = 'none';
-                button.disabled = false;
-                button.style.opacity = '1';
-                button.style.cursor = 'pointer';
-            }
-        }
-        
-        showSuccess(form) {
-            this.hideMessage(form);
-            const successId = form.id + '-success-message';
-            const successElement = document.getElementById(successId);
-            
-            if (successElement) {
-                successElement.style.display = 'block';
-                form.style.display = 'none';
-            }
-        }
-        
-        showError(form, message) {
-            this.hideMessage(form);
-            const errorId = form.id + '-error-message';
-            const errorElement = document.getElementById(errorId);
-            
-            if (errorElement) {
-                const textElement = errorElement.querySelector('p');
-                if (textElement && message) {
-                    textElement.textContent = message;
-                }
-                errorElement.style.display = 'block';
-            }
-        }
-        
-        hideMessage(form) {
-            const successId = form.id + '-success-message';
-            const errorId = form.id + '-error-message';
-            
-            [successId, errorId].forEach(id => {
-                const element = document.getElementById(id);
-                if (element) element.style.display = 'none';
-            });
-            
-            form.style.display = 'block';
-        }
-        
-        setAnalyticsFields(form) {
-            // URL страницы
-            const pageUrlField = form.querySelector('input[name="page_url"]');
-            if (pageUrlField) {
-                pageUrlField.value = window.location.href;
+                // Показываем ошибку
+                showError(form, result.error || 'Ошибка отправки');
+                console.error('❌ Ошибка:', result);
             }
             
-            // UTM метки
-            const utmSourceField = form.querySelector('input[name="utm_source"]');
-            if (utmSourceField) {
-                const params = new URLSearchParams(window.location.search);
-                const utmSource = params.get('utm_source') || 
-                                 params.get('utm_medium') || 
-                                 params.get('utm_campaign') || 
-                                 'direct';
-                utmSourceField.value = utmSource;
-            }
-        }
-        
-        sendAnalytics(formId) {
-            // Яндекс.Метрика
-            if (typeof ym !== 'undefined') {
-                const goalName = formId.includes('hero') ? 'hero_form_submit' : 'final_form_submit';
-                ym(CHVRTK_CONFIG.YANDEX_METRICA_ID, 'reachGoal', goalName);
-            }
-        }
-        
-        // ФЕЙКОВЫЙ ТАЙМЕР - простой и работающий
-        initFakeCountdown() {
-            const timerElement = document.getElementById('countdown');
-            if (!timerElement) return;
-            
-            // Начальное время: 48 часов (2 суток)
-            let hours = 48;
-            let minutes = 0;
-            let seconds = 0;
-            
-            // Обновляем таймер каждую секунду
-            setInterval(() => {
-                seconds--;
-                
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                    
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                        
-                        // Если время вышло
-                        if (hours < 0) {
-                            hours = 0;
-                            minutes = 0;
-                            seconds = 0;
-                        }
-                    }
-                }
-                
-                // Форматируем вывод
-                const pad = (num) => num.toString().padStart(2, '0');
-                timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-                
-            }, 1000);
-            
-            // Обновляем сразу
-            const pad = (num) => num.toString().padStart(2, '0');
-            timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-        }
-        
-        initProgressBars() {
-            const animateBars = () => {
-                const bars = document.querySelectorAll('.progress-bar-fill');
-                bars.forEach(bar => {
-                    if (this.isElementInViewport(bar)) {
-                        const width = bar.getAttribute('data-width');
-                        bar.style.width = width + '%';
-                    }
-                });
-            };
-            
-            window.addEventListener('scroll', animateBars);
-            window.addEventListener('load', animateBars);
-        }
-        
-        isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
+        } catch (error) {
+            console.error('❌ Network error:', error);
+            showError(form, 'Ошибка сети. Попробуйте ещё раз.');
+        } finally {
+            // Возвращаем кнопку в исходное состояние
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+            submitBtn.disabled = false;
         }
     }
-
-    // Инициализация при загрузке DOM
-    document.addEventListener('DOMContentLoaded', () => {
-        window.chvrtkHandler = new ChvrtkFormHandler();
-        console.log('🚀 CHVRTK система запущена!');
-    });
-
-    // Функция для тестирования
-    window.testChvrtkForm = function(formId = 'hero-lead-form') {
-        const form = document.getElementById(formId);
-        if (!form) {
-            console.error('Форма не найдена:', formId);
-            return;
-        }
+    
+    function showSuccess(form) {
+        const formContainer = form.closest('.lead-form');
+        const successMessage = document.getElementById(form.id + '-success-message');
         
-        // Заполняем тестовыми данными
-        const randomId = Math.floor(Math.random() * 1000);
-        form.querySelector('input[name="name"]').value = `Тест ${randomId}`;
-        form.querySelector('input[name="email"]').value = `test${randomId}@chvrtk.ru`;
-        form.querySelector('input[name="phone"]').value = `+7999${100000 + randomId}`;
+        if (formContainer && successMessage) {
+            formContainer.style.display = 'none';
+            successMessage.style.display = 'block';
+        }
+    }
+    
+    function showError(form, message) {
+        const errorMessage = document.getElementById(form.id + '-error-message');
+        
+        if (errorMessage) {
+            const textElement = errorMessage.querySelector('p');
+            if (textElement && message) {
+                textElement.textContent = message;
+            }
+            errorMessage.style.display = 'block';
+            
+            // Скрываем через 5 секунд
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+    }
+    
+    function initFakeCountdown() {
+        const timerElement = document.getElementById('countdown');
+        if (!timerElement) return;
+        
+        let hours = 48;
+        let minutes = 0;
+        let seconds = 0;
+        
+        setInterval(() => {
+            seconds--;
+            
+            if (seconds < 0) {
+                seconds = 59;
+                minutes--;
+                
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                    
+                    if (hours < 0) {
+                        hours = 0;
+                        minutes = 0;
+                        seconds = 0;
+                    }
+                }
+            }
+            
+            const pad = (num) => num.toString().padStart(2, '0');
+            timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        }, 1000);
+        
+        const pad = (num) => num.toString().padStart(2, '0');
+        timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+    
+    function initProgressBars() {
+        const animateBars = () => {
+            const bars = document.querySelectorAll('.progress-bar-fill');
+            bars.forEach(bar => {
+                if (isElementInViewport(bar)) {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateBars);
+        window.addEventListener('load', animateBars);
+    }
+    
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+    
+    // Функция для тестирования
+    window.testForm = function(formId = 'hero-lead-form') {
+        const form = document.getElementById(formId);
+        if (!form) return;
+        
+        form.querySelector('input[name="name"]').value = 'Тест ' + Math.floor(Math.random() * 1000);
+        form.querySelector('input[name="email"]').value = 'test' + Date.now() + '@chvrtk.ru';
+        form.querySelector('input[name="phone"]').value = '+7916' + Math.floor(1000000 + Math.random() * 9000000);
         
         if (formId === 'hero-lead-form') {
             form.querySelector('select[name="goal"]').value = 'Работа в международной компании';
@@ -1299,10 +1057,8 @@
             form.querySelector('select[name="level"]').value = 'Средний (B1-B2)';
         }
         
-        // Триггерим отправку
         form.dispatchEvent(new Event('submit'));
-        
-        console.log(`🧪 Тест запущен для ${formId}`);
+        console.log('🧪 Тест запущен');
     };
 </script>
 
