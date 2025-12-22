@@ -1,0 +1,1313 @@
+полностью исправь код. он выдает мне ошибку отправки:
+
+
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <title>CHVRTK — Английский для IT-специалистов и предпринимателей | Онлайн-школа</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Заговорите на английском через 8 недель. Методика A-E-E-R для IT-специалистов, разработчиков, предпринимателей. Бесплатный тест и разбор уровня.">
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j=0; j<document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(96567843, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/96567843" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    <style>
+        /* Дополнительные стили для конверсии */
+        :root {
+            --accent-primary: #00D4A1;
+            --accent-secondary: #6B7FFF;
+            --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        }
+        
+        .conversion-badge {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: #000;
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .cta-button-primary {
+            background: var(--accent-gradient);
+            color: #000 !important;
+            font-weight: 700;
+            border: none !important;
+            padding: 15px 25px !important;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            text-align: center;
+            line-height: normal;
+        }
+        
+        .cta-button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(107, 127, 255, 0.4);
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--accent-primary);
+            padding: 25px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .result-badge {
+            background: rgba(0, 212, 161, 0.1);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .guarantee-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(0, 212, 161, 0.3);
+            text-align: center;
+        }
+        
+        .lead-form {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* ИСПРАВЛЕННЫЕ СТИЛИ ДЛЯ СЕЛЕКТОВ */
+        .lead-form input, .lead-form select {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+        
+        /* КРИТИЧЕСКИ ВАЖНО: Исправляем селекты */
+        .lead-form select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+            padding-right: 45px;
+            cursor: pointer;
+            height: auto;
+            min-height: 50px;
+        }
+        
+        /* Фикс для опций */
+        .lead-form select option {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        
+        /* Для Firefox */
+        .lead-form select:-moz-focusring {
+            color: transparent;
+            text-shadow: 0 0 0 #fff;
+        }
+        
+        /* Для Safari */
+        .lead-form select::-webkit-inner-spin-button,
+        .lead-form select::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Визуальная обратная связь при фокусе */
+        .lead-form input:focus, .lead-form select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            background: rgba(0, 212, 161, 0.05);
+            box-shadow: 0 0 0 2px rgba(0, 212, 161, 0.1);
+        }
+        
+        /* Стиль для правильного заполнения */
+        .lead-form input.valid, .lead-form select.valid {
+            border-color: var(--accent-primary) !important;
+            background: rgba(0, 212, 161, 0.05) !important;
+        }
+        
+        /* Стиль для ошибки */
+        .lead-form input.error, .lead-form select.error {
+            border-color: #FF6432 !important;
+            background: rgba(255, 100, 50, 0.05) !important;
+        }
+        
+        .social-proof-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            margin: 40px 0;
+        }
+        
+        .social-proof-track {
+            display: flex;
+            gap: 40px;
+            animation: scrollLogos 30s linear infinite;
+            padding: 20px 0;
+        }
+        
+        .social-proof-track:hover {
+            animation-play-state: paused;
+        }
+        
+        .social-proof-track img {
+            height: 35px;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .social-proof-track img:hover {
+            opacity: 1;
+        }
+        
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+            width: 0;
+            transition: width 2s ease-in-out;
+        }
+        
+        .urgency-box {
+            background: linear-gradient(135deg, rgba(255, 50, 50, 0.1), rgba(255, 100, 50, 0.1));
+            border: 1px solid rgba(255, 100, 50, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .timer {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FF6432;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+        
+        /* Фиксируем высоту карточек с форматами обучения */
+        .format-card {
+            background: rgba(255,255,255,0.03);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0,212,161,0.3);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .format-card .button-container {
+            margin-top: auto;
+            padding-top: 20px;
+        }
+        
+        .format-card-header {
+            text-align: center;
+            margin-bottom: 20px;
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Исправляем выравнивание заголовков */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        /* Убираем гигантскую кнопку из мобильной навигации */
+        #mobileTopbar .cta-mobile {
+            display: none;
+        }
+        
+        /* Статистика - центрирование */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            flex: 0 1 auto;
+            min-width: 150px;
+        }
+        
+        /* Стили для ошибок валидации */
+        .field-error {
+            color: #FF6432;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            display: none;
+            padding-left: 5px;
+        }
+        
+        .form-success, .form-error {
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Исправляем отступы для лучшего адаптива */
+        @media (max-width: 768px) {
+            .inner {
+                padding: 20px !important;
+            }
+            
+            .lead-form {
+                padding: 20px;
+            }
+            
+            .format-card {
+                margin-bottom: 20px;
+            }
+            
+            .stats-container {
+                gap: 20px;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+            }
+            
+            .timer {
+                font-size: 1.5rem;
+            }
+            
+            .lead-form select {
+                padding-right: 40px;
+                background-position: right 12px center;
+                min-height: 45px;
+            }
+        }
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .conversion-badge {
+                font-size: 0.8rem;
+                padding: 5px 12px;
+            }
+            
+            .timer {
+                font-size: 1.2rem;
+            }
+            
+            .lead-form {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+<!-- Mobile Topbar -->
+<div id="mobileTopbar">
+    <div class="scroll-container">
+        <a href="speaking-lab.html">SPEAKING LAB</a>
+        <a href="individual.html">INDIVIDUAL</a>
+        <a href="index.html" class="center-btn">CHVRTK</a>
+        <a href="events.html">EVENTS</a>
+        <a href="ielts.html">IELTS</a>
+        <a href="team.html">TEAM</a>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <div class="brand">
+            <a href="index.html"><h2>CHVRTK</h2></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="speaking-lab.html">Speaking Lab</a></li>
+                <li><a href="individual.html">Individual Track</a></li>
+                <li><a href="ielts.html">IELTS</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="team.html">Команда</a></li>
+                <li><a href="#cta-final" class="button primary small" style="margin-top: 20px;">Бесплатный урок</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Hero Section -->
+    <section id="intro" class="wrapper style1 fullscreen fade-up">
+        <div class="inner">
+            <div class="conversion-badge">Заговорите на английском через 8 недель</div>
+            <h1>Английский, который <span style="color: #00D4A1;">работает</span> в вашей IT-карьере</h1>
+            <p class="major" style="font-size: 1.3rem; line-height: 1.6;">
+                Методика A-E-E-R, созданная в МГУ. Готовим к митингам, интервью и переговорам с международными командами. 
+                <strong>Результат или вернём деньги.</strong>
+            </p>
+            
+            <!-- Бесконечная лента логотипов -->
+            <div class="social-proof-container">
+                <p style="text-align: center; margin-bottom: 10px; opacity: 0.8;">Наши студенты работают в:</p>
+                <div class="social-proof-track">
+                    <!-- Первый набор логотипов -->
+                    <img src="images/tinkoff.png" alt="Tinkoff">
+                    <img src="images/yandex.png" alt="Yandex">
+                    <img src="images/sber.png" alt="Sber">
+                    <img src="images/ozon.png" alt="Ozon">
+
+                    <!-- Дублируем для бесконечной ленты -->
+                    <img src="images/yandex.png" alt="Yandex">
+                    <img src="images/tinkoff.png" alt="Tinkoff">
+                    <img src="images/sber.png" alt="Sber">
+                    <img src="images/ozon.png" alt="Ozon">
+                </div>
+            </div>
+            
+            <!-- Lead Magnet Form -->
+            <div class="lead-form" style="max-width: 600px; margin: 40px auto;">
+                <h3>Получите разбор вашего уровня + план развития</h3>
+                <p>Оставьте контакты, и наш методист свяжется с вами в течение 30 минут</p>
+                
+                <!-- ФОРМА 1: Главная (Hero форма) -->
+                <form id="hero-lead-form" class="lead-form-js">
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <input type="text" name="name" placeholder="Ваше имя" required data-validate="name">
+                            <div class="field-error"></div>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 200px;">
+                            <input type="email" name="email" placeholder="Рабочий email" required data-validate="email">
+                            <div class="field-error"></div>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 200px;">
+                            <input type="tel" name="phone" placeholder="Телефон/Telegram" data-validate="phone">
+                            <div class="field-error"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <select name="goal" required data-validate="select" style="height: auto; min-height: 50px; line-height: 1.5;">
+                            <option value="" disabled selected>Выберите вашу цель</option>
+                            <option value="Работа в международной компании">Работа в международной компании</option>
+                            <option value="Переезд за рубеж">Переезд за рубеж</option>
+                            <option value="Развитие стартапа">Развитие стартапа</option>
+                            <option value="Повышение на текущей работе">Повышение на текущей работе</option>
+                            <option value="Сдача IELTS/TOEFL">Сдача IELTS/TOEFL</option>
+                        </select>
+                        <div class="field-error"></div>
+                    </div>
+                    
+                    <!-- Скрытые поля для аналитики -->
+                    <input type="hidden" name="page_url" value="">
+                    <input type="hidden" name="utm_source" value="">
+                    
+                    <button type="submit" class="button cta-button-primary" style="width: 100%;">
+                        <span class="btn-text">Получить бесплатный разбор уровня</span>
+                        <span class="btn-loading" style="display: none;">⏳ Отправляем...</span>
+                    </button>
+                    
+                    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">
+                        Отправляя форму, вы соглашаетесь на обработку персональных данных
+                    </p>
+                </form>
+                
+                <!-- Сообщение об успехе -->
+                <div id="hero-lead-form-success-message" class="form-success" style="display: none;">
+                    <div style="background: rgba(0, 212, 161, 0.1); border: 1px solid #00D4A1; 
+                                border-radius: 8px; padding: 20px; text-align: center;">
+                        <p style="color: #00D4A1; margin: 0; font-size: 1.1rem; font-weight: 500;">
+                            ✅ Спасибо! Мы получили вашу заявку.<br>
+                            Наш менеджер свяжется в течение 30 минут.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Сообщение об ошибке -->
+                <div id="hero-lead-form-error-message" class="form-error" style="display: none;">
+                    <div style="background: rgba(255, 100, 50, 0.1); border: 1px solid #FF6432; 
+                                border-radius: 8px; padding: 20px; text-align: center;">
+                        <p style="color: #FF6432; margin: 0; font-size: 1.1rem; font-weight: 500;">
+                            ⚠️ Ошибка отправки. Пожалуйста, попробуйте ещё раз.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Статистика - выровнена по центру -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span style="font-size: 2rem; color: #00D4A1; display: block;">42+</span>
+                    <p style="margin: 5px 0;">студента прошли собеседование<br>на английском в 2024</p>
+                </div>
+                <div class="stat-item">
+                    <span style="font-size: 2rem; color: #00D4A1; display: block;">8</span>
+                    <p style="margin: 5px 0;">недель до уверенного<br>speaking в работе</p>
+                </div>
+                <div class="stat-item">
+                    <span style="font-size: 2rem; color: #00D4A1; display: block;">4</span>
+                    <p style="margin: 5px 0;">человека в группе —<br>максимум практики</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Whom Section -->
+    <section id="audience" class="wrapper style2-alt fade-up">
+        <div class="inner">
+            <h2 class="section-title">Это про вас?</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1rem;">
+                CHVRTK помогает IT-профессионалам сразу применять английский в работе, а не учить теорию годами
+            </p>
+            
+            <div class="features">
+                <section>
+                    <span class="icon solid major fa-laptop-code" style="color: #00D4A1;"></span>
+                    <h3>Разработчик</h3>
+                    <p>Хотите участвовать в code review на английском, обсуждать архитектуру с иностранными коллегами</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" data-width="85"></div>
+                    </div>
+                    <span class="result-badge">Результат: через 4 недели</span>
+                </section>
+                
+                <section>
+                    <span class="icon solid major fa-chart-line" style="color: #6B7FFF;"></span>
+                    <h3>Продакт-менеджер</h3>
+                    <p>Нужно презентовать продукт инвесторам, проводить демо для заказчиков из США/Европы</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" data-width="90"></div>
+                    </div>
+                    <span class="result-badge">Результат: через 6 недель</span>
+                </section>
+                
+                <section>
+                    <span class="icon solid major fa-rocket" style="color: #00D4A1;"></span>
+                    <h3>Founder/Startup</h3>
+                    <p>Выходите на зарубежные рынки, нанимаете remote-команду, общаетесь с инвесторами</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" data-width="95"></div>
+                    </div>
+                    <span class="result-badge">Результат: через 8 недель</span>
+                </section>
+                
+                <!-- Четвертая целевая аудитория -->
+                <section>
+                    <span class="icon solid major fa-user-tie" style="color: #6B7FFF;"></span>
+                    <h3>Техлид/Архитектор</h3>
+                    <p>Управляете распределённой командой, проводите тех-ревью, определяете стратегию развития продуктов</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" data-width="90"></div>
+                    </div>
+                    <span class="result-badge">Результат: через 6 недель</span>
+                </section>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#cta-final" class="button cta-button-primary" style="padding: 12px 30px;">Узнать, подойдёт ли вам</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="wrapper style3 fade-up">
+        <div class="inner">
+            <h2 class="section-title">Что получают наши студенты</h2>
+            
+            <div class="testimonial-card">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: #333; margin-right: 15px;"></div>
+                    <div>
+                        <strong>Андрей, Senior Python Developer</strong><br>
+                        <span style="opacity: 0.7;">Прошёл собеседование в немецкую компанию</span>
+                    </div>
+                </div>
+                <p>"Через 2 месяца Speaking Lab я смог пройти 5-этапное собеседование в Berlin. Особенно помогла практика технических дискуссий."</p>
+                <div style="margin-top: 15px;">
+                    <span class="result-badge">+2500€ к зарплате</span>
+                    <span class="result-badge">Собеседование на английском</span>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: #333; margin-right: 15px;"></div>
+                    <div>
+                        <strong>Мария, Product Manager</strong><br>
+                        <span style="opacity: 0.7;">Вывела продукт на рынок США</span>
+                    </div>
+                </div>
+                <p>"Individual Track помог подготовить pitch deck и провести переговоры с инвесторами из Кремниевой долины. Через 3 месяца закрыли раунд."</p>
+                <div style="margin-top: 15px;">
+                    <span class="result-badge">Привлекли $500K</span>
+                    <span class="result-badge">Презентация для инвесторов</span>
+                </div>
+            </div>
+            
+            <!-- Urgency Block -->
+            <div class="urgency-box">
+                <h3 style="color: #FF6432; margin-top: 0;">Следующий поток Speaking Lab стартует 1 апреля</h3>
+                <p>Осталось 3 места из 4. Закрытие записи через:</p>
+                <div class="timer" id="countdown">48:00:00</div>
+                <a href="#cta-final" class="button cta-button-primary" style="background: #FF6432; color: white; border: none; padding: 12px 30px;">
+                    Забронировать последнее место
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="wrapper style1 fade-up">
+        <div class="inner">
+            <h2 class="section-title">Методика A-E-E-R: Почему это работает</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="display: flex; align-items: center; margin: 40px 0; gap: 30px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3>Awareness → Expression → Expansion → Reflex</h3>
+                        <p>Мы не учим грамматическим правилам. Мы учим <strong>мыслить и реагировать</strong> на английском.</p>
+                        <ul>
+                            <li><strong>Недели 1-2:</strong> Ломаем языковой барьер. Говорим с первого занятия</li>
+                            <li><strong>Недели 3-4:</strong> Техническая лексика вашей специальности</li>
+                            <li><strong>Недели 5-8:</strong> Симуляции реальных рабочих ситуаций</li>
+                            <li><strong>Итог:</strong> Английский становится инструментом, а не предметом изучения</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <div style="background: #222; padding: 20px; border-radius: 10px;">
+                            <h4 style="color: #00D4A1;">Ваш прогресс за 8 недель:</h4>
+                            <div style="margin: 20px 0;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Speaking confidence</span>
+                                    <span>20% → 85%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div style="margin: 20px 0;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Work vocabulary</span>
+                                    <span>10% → 90%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div style="margin: 20px 0;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Interview readiness</span>
+                                    <span>5% → 95%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-fill" data-width="95"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="guarantee-box">
+                <h3 style="color: #00D4A1;">Гарантия результата</h3>
+                <p style="font-size: 1.2rem;">Если через 8 недель обучения вы не сможете уверенно участвовать в рабочем митинге на английском — <strong>мы вернём 100% стоимости</strong> последнего месяца обучения.</p>
+                <p><em>Гарантия действует при посещении 90% занятий и выполнении домашних заданий</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formats Section -->
+    <section id="formats" class="wrapper style2 fade-up">
+        <div class="inner">
+            <h2 class="section-title">Форматы обучения</h2>
+            <p style="text-align: center; margin-bottom: 50px;">Выберите то, что подходит именно вам</p>
+            
+            <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
+                <!-- Speaking Lab Card -->
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="format-card" style="border-color: rgba(0,212,161,0.3);">
+                        <div class="format-card-header">
+                            <span class="icon solid major fa-users" style="color: #00D4A1; font-size: 2.5rem;"></span>
+                            <h3>Speaking Lab</h3>
+                            <div style="background: rgba(0,212,161,0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                                <strong>Самый популярный формат</strong>
+                            </div>
+                        </div>
+                        <ul style="flex-grow: 1;">
+                            <li>Группа 3-4 человека одного уровня</li>
+                            <li>2 занятия в неделю по 90 минут</li>
+                            <li>Только speaking, 90% времени говорите вы</li>
+                            <li>Темы: интервью, переговоры, митинги</li>
+                            <li>Записи всех занятий</li>
+                        </ul>
+                        <div class="button-container">
+                            <p style="text-align: center;"><strong>25 000₽/месяц</strong></p>
+                            <a href="speaking-lab.html" class="button" style="width: 100%;">Подробнее о Speaking Lab</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Individual Card -->
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="format-card" style="border-color: rgba(107,127,255,0.3);">
+                        <div class="format-card-header" style="min-height: 130px; display: flex; flex-direction: column; justify-content: center;">
+                            <span class="icon solid major fa-user" style="color: #6B7FFF; font-size: 2.5rem;"></span>
+                            <h3>Individual Track</h3>
+                            <div style="height: 38px; margin: 10px 0;"></div> <!-- Пустой блок для выравнивания высоты -->
+                        </div>
+                        <ul style="flex-grow: 1;">
+                            <li>Персональная программа под ваши цели</li>
+                            <li>Гибкое расписание</li>
+                            <li>Фокус на карьерные задачи</li>
+                            <li>Подготовка к конкретным собеседованиям</li>
+                            <li>Приоритетная поддержка</li>
+                        </ul>
+                        <div class="button-container">
+                            <p style="text-align: center;"><strong>от 45 000₽/месяц</strong></p>
+                            <a href="individual.html" class="button" style="width: 100%;">Обсудить индивидуальную программу</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section id="cta-final" class="wrapper style3 fullscreen fade-up">
+        <div class="inner" style="text-align: center;">
+            <h2 class="section-title">Запишитесь на бесплатный урок с методистом</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Наш менеджер свяжется с вами, уточнит детали ваших целей и подберёт:<br>
+                1. Преподавателя с экспертизой в вашей сфере<br>
+                2. Удобное время для пробного урока<br>
+                3. Формат, который максимально подходит под ваши задачи
+            </p>
+            
+            <div class="lead-form" style="max-width: 700px; margin: 0 auto 30px;">
+                <!-- ФОРМА 2: Финальная (Final форма) -->
+                <form id="final-lead-form" class="lead-form-js">
+                    <div style="display: grid; gap: 15px; margin-bottom: 20px;">
+                        <div>
+                            <input type="text" name="name" placeholder="Имя" required data-validate="name">
+                            <div class="field-error"></div>
+                        </div>
+                        <div>
+                            <input type="email" name="email" placeholder="Email" required data-validate="email">
+                            <div class="field-error"></div>
+                        </div>
+                        <div>
+                            <input type="tel" name="phone" placeholder="Телефон" required data-validate="phone">
+                            <div class="field-error"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <select name="level" required style="margin-bottom: 20px;" data-validate="select" style="height: auto; min-height: 50px; line-height: 1.5;">
+                            <option value="" disabled selected>Ваш текущий уровень английского</option>
+                            <option value="Начинающий (A1-A2)">Начинающий (A1-A2)</option>
+                            <option value="Средний (B1-B2)">Средний (B1-B2)</option>
+                            <option value="Продвинутый (C1+)">Продвинутый (C1+)</option>
+                            <option value="Не знаю">Не знаю</option>
+                        </select>
+                        <div class="field-error"></div>
+                    </div>
+                    
+                    <!-- Скрытые поля для аналитики -->
+                    <input type="hidden" name="page_url" value="">
+                    <input type="hidden" name="utm_source" value="">
+                    
+                    <button type="submit" class="button cta-button-primary" style="width: 100%;">
+                        <span class="btn-text">Записаться на бесплатный урок</span>
+                        <span class="btn-loading" style="display: none;">⏳ Отправляем...</span>
+                    </button>
+                </form>
+                
+                <!-- Сообщение об успехе -->
+                <div id="final-lead-form-success-message" class="form-success" style="display: none; margin-top: 20px;">
+                    <div style="background: rgba(0, 212, 161, 0.1); border: 1px solid #00D4A1; 
+                                border-radius: 8px; padding: 20px; text-align: center;">
+                        <p style="color: #00D4A1; margin: 0; font-size: 1.1rem; font-weight: 500;">
+                            ✅ Отлично! Заявка отправлена.<br>
+                            Методист свяжется в течение 30 минут.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Сообщение об ошибке -->
+                <div id="final-lead-form-error-message" class="form-error" style="display: none; margin-top: 20px;">
+                    <div style="background: rgba(255, 100, 50, 0.1); border: 1px solid #FF6432; 
+                                border-radius: 8px; padding: 20px; text-align: center;">
+                        <p style="color: #FF6432; margin: 0; font-size: 1.1rem; font-weight: 500;">
+                            ⚠️ Ошибка отправки. Пожалуйста, попробуйте ещё раз.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px;">
+                <div style="display: flex; align-items: center;">
+                    <span class="icon solid fa-check" style="color: #00D4A1; margin-right: 10px;"></span>
+                    <span>Поддержка 24/7 в Telegram</span>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <span class="icon solid fa-check" style="color: #00D4A1; margin-right: 10px;"></span>
+                    <span>Персональный куратор</span>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <span class="icon solid fa-check" style="color: #00D4A1; margin-right: 10px;"></span>
+                    <span>Доступ к материалам</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-bottom: 20px;">
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="font-size: 1.2rem;">CHVRTK</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">Онлайн-школа английского для IT-специалистов</p>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="font-size: 1.2rem;">Контакты</h3>
+                    <ul class="contact" style="list-style: none; padding: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 8px;"><a href="https://t.me/heavy777">Telegram</a></li>
+                        <li style="margin-bottom: 8px;"><a href="mailto:hello@chvrtk.ru">hello@chvrtk.ru</a></li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="font-size: 1.2rem;">Документы</h3>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 8px;"><a href="/privacy">Политика конфиденциальности</a></li>
+                        <li style="margin-bottom: 8px;"><a href="/offer">Договор-оферта</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.7;">
+                <p>© 2024 chvrtk.ru • <a href="https://alumni.chvrtk.ru">Alumni</a> • <a href="https://career.chvrtk.ru">Careers</a></p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<!-- CHVRTK Form Handler (Fully Fixed) -->
+<script>
+    // ====================================================================
+    // CHVRTK FORM HANDLER v4.0 (Полностью исправленный)
+    // ====================================================================
+    
+    // КОНФИГУРАЦИЯ
+    const CHVRTK_CONFIG = {
+        API_BASE_URL: 'https://functions.yandexcloud.net/d4el3i6cr11atjnavsrm',
+        
+        ENDPOINTS: {
+            HERO: 'submit-hero',
+            FINAL: 'submit-final'
+        },
+        
+        YANDEX_METRICA_ID: 96567843
+    };
+
+    class ChvrtkFormHandler {
+        constructor() {
+            this.init();
+        }
+        
+        init() {
+            // Инициализируем формы
+            this.initForms();
+            
+            // Инициализируем фейковый таймер
+            this.initFakeCountdown();
+            
+            // Инициализируем прогресс-бары
+            this.initProgressBars();
+            
+            console.log('✅ CHVRTK Form Handler v4.0 initialized');
+        }
+        
+        initForms() {
+            const forms = document.querySelectorAll('.lead-form-js');
+            
+            forms.forEach(form => {
+                // Устанавливаем обработчик отправки
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleSubmit(form);
+                });
+                
+                // Устанавливаем аналитические поля
+                this.setAnalyticsFields(form);
+                
+                // Устанавливаем валидацию на лету
+                this.setupFieldValidation(form);
+            });
+        }
+        
+        setupFieldValidation(form) {
+            const inputs = form.querySelectorAll('input, select');
+            
+            inputs.forEach(input => {
+                // Валидация при потере фокуса
+                input.addEventListener('blur', () => {
+                    this.validateField(input);
+                });
+                
+                // Визуальная обратная связь при вводе
+                input.addEventListener('input', () => {
+                    this.clearFieldError(input);
+                    if (input.value.trim()) {
+                        this.markValid(input);
+                    } else {
+                        this.clearFieldStatus(input);
+                    }
+                });
+                
+                // Визуальная обратная связь при изменении селекта
+                if (input.tagName === 'SELECT') {
+                    input.addEventListener('change', () => {
+                        this.validateField(input);
+                    });
+                }
+            });
+        }
+        
+        async handleSubmit(form) {
+            // Валидируем форму
+            if (!this.validateForm(form)) {
+                this.showError(form, 'Пожалуйста, заполните все обязательные поля');
+                return;
+            }
+            
+            // Получаем данные формы
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Показываем загрузку
+            const submitBtn = form.querySelector('button[type="submit"]');
+            this.setLoading(submitBtn, true);
+            
+            // Определяем endpoint (оставляем как есть)
+            const action = form.id.includes('hero') 
+                ? CHVRTK_CONFIG.ENDPOINTS.HERO 
+                : CHVRTK_CONFIG.ENDPOINTS.FINAL;
+
+            // Формируем URL (НОВЫЙ СПОСОБ - путь в URL)
+            const url = `${CHVRTK_CONFIG.API_BASE_URL}/${action}`;
+            
+            try {
+                // Отправляем запрос
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const textResult = await response.text();
+                let result;
+                
+                try {
+                    result = JSON.parse(textResult);
+                } catch (e) {
+                    console.error('JSON Parse Error:', e);
+                    result = { 
+                        success: false, 
+                        message: 'Ошибка сервера. Попробуйте позже.' 
+                    };
+                }
+                
+                if (result.success) {
+                    // Успех
+                    this.showSuccess(form);
+                    this.sendAnalytics(form.id);
+                    
+                    // Сбрасываем форму через 5 секунд
+                    setTimeout(() => {
+                        form.reset();
+                        this.hideMessage(form);
+                        // Сбрасываем статусы полей
+                        form.querySelectorAll('input, select').forEach(field => {
+                            this.clearFieldStatus(field);
+                        });
+                    }, 5000);
+                    
+                } else {
+                    // Ошибка
+                    this.showError(form, result.message || 'Ошибка отправки');
+                }
+                
+            } catch (error) {
+                console.error('Network Error:', error);
+                this.showError(form, 'Ошибка сети. Попробуйте ещё раз');
+                
+            } finally {
+                this.setLoading(submitBtn, false);
+            }
+        }
+        
+        validateForm(form) {
+            let isValid = true;
+            
+            // Проверяем обязательные поля
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    this.markInvalid(field, 'Это поле обязательно');
+                    isValid = false;
+                } else {
+                    // Если поле заполнено, проверяем email
+                    if (field.type === 'email' && field.value.trim()) {
+                        if (!this.validateEmail(field.value)) {
+                            this.markInvalid(field, 'Введите корректный email');
+                            isValid = false;
+                        }
+                    }
+                }
+            });
+            
+            return isValid;
+        }
+        
+        validateField(field) {
+            const type = field.type || field.getAttribute('data-validate');
+            
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                this.markInvalid(field, 'Это поле обязательно');
+                return false;
+            }
+            
+            if (!field.value.trim()) {
+                this.clearFieldStatus(field);
+                return true;
+            }
+            
+            if (type === 'email' || field.type === 'email') {
+                if (!this.validateEmail(field.value)) {
+                    this.markInvalid(field, 'Введите корректный email');
+                    return false;
+                }
+            }
+            
+            this.markValid(field);
+            return true;
+        }
+        
+        validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        markInvalid(field, message) {
+            field.classList.add('error');
+            field.classList.remove('valid');
+            
+            const errorElement = field.parentNode.querySelector('.field-error');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        markValid(field) {
+            field.classList.remove('error');
+            field.classList.add('valid');
+            
+            const errorElement = field.parentNode.querySelector('.field-error');
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        }
+        
+        clearFieldError(field) {
+            const errorElement = field.parentNode.querySelector('.field-error');
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        }
+        
+        clearFieldStatus(field) {
+            field.classList.remove('error', 'valid');
+            this.clearFieldError(field);
+        }
+        
+        setLoading(button, isLoading) {
+            const textSpan = button.querySelector('.btn-text');
+            const loadingSpan = button.querySelector('.btn-loading');
+            
+            if (isLoading) {
+                textSpan.style.display = 'none';
+                loadingSpan.style.display = 'inline';
+                button.disabled = true;
+                button.style.opacity = '0.7';
+                button.style.cursor = 'not-allowed';
+            } else {
+                textSpan.style.display = 'inline';
+                loadingSpan.style.display = 'none';
+                button.disabled = false;
+                button.style.opacity = '1';
+                button.style.cursor = 'pointer';
+            }
+        }
+        
+        showSuccess(form) {
+            this.hideMessage(form);
+            const successId = form.id + '-success-message';
+            const successElement = document.getElementById(successId);
+            
+            if (successElement) {
+                successElement.style.display = 'block';
+                form.style.display = 'none';
+            }
+        }
+        
+        showError(form, message) {
+            this.hideMessage(form);
+            const errorId = form.id + '-error-message';
+            const errorElement = document.getElementById(errorId);
+            
+            if (errorElement) {
+                const textElement = errorElement.querySelector('p');
+                if (textElement && message) {
+                    textElement.textContent = message;
+                }
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        hideMessage(form) {
+            const successId = form.id + '-success-message';
+            const errorId = form.id + '-error-message';
+            
+            [successId, errorId].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) element.style.display = 'none';
+            });
+            
+            form.style.display = 'block';
+        }
+        
+        setAnalyticsFields(form) {
+            // URL страницы
+            const pageUrlField = form.querySelector('input[name="page_url"]');
+            if (pageUrlField) {
+                pageUrlField.value = window.location.href;
+            }
+            
+            // UTM метки
+            const utmSourceField = form.querySelector('input[name="utm_source"]');
+            if (utmSourceField) {
+                const params = new URLSearchParams(window.location.search);
+                const utmSource = params.get('utm_source') || 
+                                 params.get('utm_medium') || 
+                                 params.get('utm_campaign') || 
+                                 'direct';
+                utmSourceField.value = utmSource;
+            }
+        }
+        
+        sendAnalytics(formId) {
+            // Яндекс.Метрика
+            if (typeof ym !== 'undefined') {
+                const goalName = formId.includes('hero') ? 'hero_form_submit' : 'final_form_submit';
+                ym(CHVRTK_CONFIG.YANDEX_METRICA_ID, 'reachGoal', goalName);
+            }
+        }
+        
+        // ФЕЙКОВЫЙ ТАЙМЕР - простой и работающий
+        initFakeCountdown() {
+            const timerElement = document.getElementById('countdown');
+            if (!timerElement) return;
+            
+            // Начальное время: 48 часов (2 суток)
+            let hours = 48;
+            let minutes = 0;
+            let seconds = 0;
+            
+            // Обновляем таймер каждую секунду
+            setInterval(() => {
+                seconds--;
+                
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        
+                        // Если время вышло
+                        if (hours < 0) {
+                            hours = 0;
+                            minutes = 0;
+                            seconds = 0;
+                        }
+                    }
+                }
+                
+                // Форматируем вывод
+                const pad = (num) => num.toString().padStart(2, '0');
+                timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+                
+            }, 1000);
+            
+            // Обновляем сразу
+            const pad = (num) => num.toString().padStart(2, '0');
+            timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        }
+        
+        initProgressBars() {
+            const animateBars = () => {
+                const bars = document.querySelectorAll('.progress-bar-fill');
+                bars.forEach(bar => {
+                    if (this.isElementInViewport(bar)) {
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width + '%';
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', animateBars);
+            window.addEventListener('load', animateBars);
+        }
+        
+        isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+    }
+
+    // Инициализация при загрузке DOM
+    document.addEventListener('DOMContentLoaded', () => {
+        window.chvrtkHandler = new ChvrtkFormHandler();
+        console.log('🚀 CHVRTK система запущена!');
+    });
+
+    // Функция для тестирования
+    window.testChvrtkForm = function(formId = 'hero-lead-form') {
+        const form = document.getElementById(formId);
+        if (!form) {
+            console.error('Форма не найдена:', formId);
+            return;
+        }
+        
+        // Заполняем тестовыми данными
+        const randomId = Math.floor(Math.random() * 1000);
+        form.querySelector('input[name="name"]').value = `Тест ${randomId}`;
+        form.querySelector('input[name="email"]').value = `test${randomId}@chvrtk.ru`;
+        form.querySelector('input[name="phone"]').value = `+7999${100000 + randomId}`;
+        
+        if (formId === 'hero-lead-form') {
+            form.querySelector('select[name="goal"]').value = 'Работа в международной компании';
+        } else {
+            form.querySelector('select[name="level"]').value = 'Средний (B1-B2)';
+        }
+        
+        // Триггерим отправку
+        form.dispatchEvent(new Event('submit'));
+        
+        console.log(`🧪 Тест запущен для ${formId}`);
+    };
+</script>
+
+</body>
+</html>
