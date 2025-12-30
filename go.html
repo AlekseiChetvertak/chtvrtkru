@@ -586,40 +586,82 @@
         </div>
     </section>
 
-    <!-- Results Section -->
-    <section id="results" class="wrapper style3 fade-up">
-        <div class="inner">
-            <h2 class="section-title">Что получают наши студенты</h2>
-            
-            <div class="testimonial-card">
-                <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <div style="width: 60px; height: 60px; border-radius: 50%; background: #333; margin-right: 15px;"></div>
-                    <div>
-                        <strong>Андрей, Senior Python Developer</strong><br>
-                        <span style="opacity: 0.7;">Прошёл собеседование в немецкую компанию</span>
-                    </div>
+        <!-- Results Section -->
+<section id="results" class="wrapper style3 fade-up">
+    <div class="inner">
+        <h2 class="section-title">Что получают наши студенты</h2>
+        
+        <!-- Никита (Telegram style) -->
+        <div class="testimonial-card telegram">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; overflow: hidden;">
+                    <img src="images/testimonials/nikita.jpg" 
+                        alt="Никита" 
+                        style="width: 100%; height: 100%; object-fit: cover;"
+                        onerror="this.onerror=null; this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #0088cc 0%, #00c6ff 100%)';">
                 </div>
-                <p>"Через 2 месяца Speaking Lab я смог пройти 5-этапное собеседование в Berlin. Особенно помогла практика технических дискуссий."</p>
-                <div style="margin-top: 15px;">
-                    <span class="result-badge">+2500€ к зарплате</span>
-                    <span class="result-badge">Собеседование на английском</span>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <div style="width: 60px; height: 60px; border-radius: 50%; background: #333; margin-right: 15px;"></div>
-                    <div>
-                        <strong>Мария, Product Manager</strong><br>
-                        <span style="opacity: 0.7;">Вывела продукт на рынок США</span>
-                    </div>
-                </div>
-                <p>"Individual Track помог подготовить pitch deck и провести переговоры с инвесторами из Кремниевой долины. Через 3 месяца закрыли раунд."</p>
-                <div style="margin-top: 15px;">
-                    <span class="result-badge">Привлекли $500K</span>
-                    <span class="result-badge">Презентация для инвесторов</span>
+                <div>
+                    <strong>Никита, Backend Developer</strong><br>
+                    <span style="opacity: 0.7;">Telegram отзыв</span>
                 </div>
             </div>
+            <p>"Сейчас прохожу несколько собеседований в Европе. На одном HR резко переключился на английский, чтобы проверить меня, но благодаря регулярной практике на Speaking Lab я спокойно ответил и даже не заметил перехода. Практика реально работает."</p>
+        </div>
+
+        <!-- Андрей (Telegram style) -->
+        <div class="testimonial-card telegram">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; overflow: hidden;">
+                    <img src="images/testimonials/andrey.jpg" 
+                        alt="Андрей" 
+                        style="width: 100%; height: 100%; object-fit: cover;"
+                        onerror="this.onerror=null; this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #0088cc 0%, #00c6ff 100%)';">
+                </div>
+                <div>
+                    <strong>Андрей, Senior Backend Developer</strong><br>
+                    <span style="opacity: 0.7;">Telegram отзыв</span>
+                </div>
+            </div>
+            <p>"Занятия были классные и продуктивные. Недавно проходил собеседование на английском — прошёл успешно. Очень полезно было отработать ответы и получить уверенность перед интервью. С удовольствием буду поддерживать статус Alumni."</p>
+        </div>
+
+        <!-- Алиса (Avito style) -->
+        <div class="testimonial-card avito">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; overflow: hidden;">
+                    <img src="images/testimonials/alisa.jpg" 
+                        alt="Алиса" 
+                        style="width: 100%; height: 100%; object-fit: cover;"
+                        onerror="this.onerror=null; this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';">
+                </div>
+                <div>
+                    <strong>Алиса, студентка, певица</strong><br>
+                    <span style="opacity: 0.7;">Avito отзыв ★★★★★</span>
+                </div>
+            </div>
+            <p>"Прекрасный преподаватель, с самого начала определили план действий, проведя пробный урок, материал подготовлен качественно, нет банальной зубрежки, современный подход и хорошее настроение! Спасибо!"</p>
+        </div>
+
+        <!-- Тигран и другие (сохранены в текущем виде) -->
+        <div class="testimonial-card">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; margin-right: 15px; overflow: hidden;">
+                    <img src="images/testimonials/tigran.jpg" 
+                        alt="Тигран" 
+                        style="width: 100%; height: 100%; object-fit: cover;"
+                        onerror="this.onerror=null; this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)';">
+                </div>
+                <div>
+                    <strong>Тигран, Аналитик, TBank</strong><br>
+                    <span style="opacity: 0.7;">Подготовка к собеседованию в Дубаи</span>
+                </div>
+            </div>
+            <p>"Готовился к собеседованию в Дубаи. За 2–3 занятия мы отработали стратегию и ответы на сложные вопросы. На интервью все прошло гладко — я успешно прошёл собеседование. Экспресс-подготовка сработала идеально."</p>
+        </div>
+
+    </div>
+</section>
+
             
             <!-- Urgency Block -->
             <div class="urgency-box">

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHVRTK CRM | Управление школой</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5; --primary-hover: #4338ca;
+            --bg: #f8fafc; --card: #ffffff;
+            --text-main: #1e293b; --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #22c55e; --warning: #f59e0b; --danger: #ef4444; --info: #0ea5e9;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; line-height: 1.5; }
+        
+        /* Login Page */
+        /* Обновленный стиль страницы входа */
+        .login-container { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); 
+        }
+
+        .login-card { 
+            background: #ffffff; 
+            padding: 3rem; 
+            border-radius: 2rem; 
+            width: 100%; 
+            max-width: 420px; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+        }
+
+        .login-card h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .login-card p.subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-card input { 
+            width: 100%; 
+            padding: 0.875rem 1.25rem; 
+            margin-bottom: 1.25rem; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 1rem; 
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            box-sizing: border-box; /* Чтобы паддинги не расширяли инпут */
+        }
+
+        .login-card input:focus { 
+            border-color: var(--primary); 
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .login-card .btn-primary {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            letter-spacing: 0.025em;
+            background: var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .login-card .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .login-card .btn-primary:active {
+            transform: translateY(0);
+        } 
+        /* App Layout */
+        .app-container { display: none; max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        
+        /* Stats Area */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-box { background: var(--card); padding: 1.5rem; border-radius: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-bottom: 4px solid var(--primary); }
+        .stat-val { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+        .stat-label { color: var(--text-muted); font-size: 0.875rem; font-weight: 500; }
+
+        /* Table & Controls */
+        .controls { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .search-input { flex-grow: 1; padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 0.75rem; }
+        
+        .table-res { background: var(--card); border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background: #f8fafc; padding: 1rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+        td { padding: 1rem; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
+        
+        /* Status Badges */
+        .st-select { border: none; font-weight: 600; padding: 0.4rem; border-radius: 0.5rem; cursor: pointer; width: 100%; }
+        .st-NEW { background: #fee2e2; color: #991b1b; }
+        .st-PROCESS { background: #fef3c7; color: #92400e; }
+        .st-WAIT { background: #e0f2fe; color: #075985; }
+        .st-PAID { background: #dcfce7; color: #166534; }
+        .st-CANCEL { background: #f1f5f9; color: #475569; }
+
+        /* Buttons */
+        .btn { padding: 0.6rem 1.2rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; border: none; transition: 0.2s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-wa { background: #25d366; color: white; text-decoration: none; display: inline-flex; align-items: center; padding: 0.4rem 0.8rem; font-size: 0.75rem; border-radius: 0.5rem; }
+        .btn-del { background: #fff1f2; color: var(--danger); font-size: 0.75rem; }
+        .btn-del:hover { background: var(--danger); color: white; }
+
+        input, select { border: 1px solid var(--border); outline: none; transition: border-color 0.2s; }
+        input:focus { border-color: var(--primary); }
+
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+
+    <div id="loginPage" class="login-container">
+    <div class="login-card">
+        <h2>CHVRTK</h2>
+        <p class="subtitle">Система управления обучением</p>
+        
+        <div style="text-align: left;">
+            <label class="form-label" style="margin-left: 0.5rem;">Логин</label>
+            <input type="text" id="user" placeholder="Введите ваш логин" value="admin">
+            
+            <label class="form-label" style="margin-left: 0.5rem;">Пароль</label>
+            <input type="password" id="pass" placeholder="••••••••">
+        </div>
+        
+        <button class="btn btn-primary" onclick="login()">Войти в CRM</button>
+        <p id="error" style="color: var(--danger); margin-top: 1.5rem; font-size: 0.875rem; display: none; font-weight: 500;">
+            ⚠️ Ошибка входа. Проверьте данные.
+        </p>
+    </div>
+</div>
+
+    <div id="app" class="app-container">
+        <div class="navbar">
+            <div>
+                <h1 style="margin:0">Рабочий стол</h1>
+                <p style="margin:0; color: var(--text-muted)">Добро пожаловать, <span id="adminName" style="color: var(--primary); font-weight: 600;"></span></p>
+            </div>
+            <button class="btn" style="background: #e2e8f0;" onclick="location.reload()">Выйти</button>
+        </div>
+
+        <div class="stats-grid" id="statsRow">
+            </div>
+
+        <div class="controls">
+            <input type="text" class="search-input" id="search" placeholder="Поиск по имени или телефону..." oninput="render()">
+            <select id="filterStatus" onchange="render()" style="width: auto;">
+                <option value="ALL">Все статусы</option>
+                <option value="NEW">Только новые</option>
+                <option value="PROCESS">В работе</option>
+                <option value="PAID">Оплачено</option>
+            </select>
+        </div>
+
+        <div class="table-res">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Студент</th>
+                        <th>Контакт</th>
+                        <th>Курс / Цель</th>
+                        <th>Статус</th>
+                        <th>Комментарий</th>
+                        <th id="thAdmin">Связь</th>
+                    </tr>
+                </thead>
+                <tbody id="leadsBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://d5d34ggl6saovpdajhps.a6hc9vya.apigw.yandexcloud.net';
+        let leads = [], userRole = '', currentUser = '', currentPass = '';
+
+        async function login() {
+            const u = document.getElementById('user').value, p = document.getElementById('pass').value;
+            try {
+                const res = await fetch(`${API_URL}/login`, { method: 'POST', body: JSON.stringify({ username: u, password: p }) });
+                const data = await res.json();
+                if (data.success) {
+                    currentUser = u; currentPass = p; userRole = data.user.role;
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('app').style.display = 'block';
+                    document.getElementById('adminName').innerText = data.user.name;
+                    loadLeads();
+                } else { document.getElementById('error').style.display = 'block'; }
+            } catch (e) { alert('Ошибка соединения'); }
+        }
+
+        async function loadLeads() {
+            try {
+                const res = await fetch(`${API_URL}/list-leads`, { headers: { 'Authorization': `${currentUser}:${currentPass}` } });
+                leads = await res.json();
+                render();
+            } catch (e) { console.error('Load failed'); }
+        }
+
+        function render() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const filter = document.getElementById('filterStatus').value;
+            const isAdmin = userRole === 'admin';
+            
+            document.getElementById('thAdmin').innerText = isAdmin ? 'Действие' : 'Связь';
+
+            const filtered = leads.filter(l => {
+                const matchSearch = (l.name || '').toLowerCase().includes(search) || (l.phone || '').includes(search);
+                const matchFilter = filter === 'ALL' || l.status === filter;
+                return matchSearch && matchFilter;
+            });
+
+            const body = document.getElementById('leadsBody');
+            body.innerHTML = filtered.map(l => {
+                const contactRaw = (l.phone || '').trim();
+                let contactButtons = '';
+
+                // Логика определения типа связи
+                if (contactRaw.includes('@')) {
+                    // Это Telegram ник
+                    const nick = contactRaw.replace('@', '');
+                    contactButtons += `<a href="https://t.me/${nick}" target="_blank" class="btn-wa" style="background:#0088cc">Telegram</a>`;
+                } else if (/[a-zA-Zа-яА-Я]/.test(contactRaw) && !contactRaw.includes('+')) {
+                    // Похоже на ник без собаки (просто текст)
+                    contactButtons += `<a href="https://t.me/${contactRaw}" target="_blank" class="btn-wa" style="background:#0088cc">Telegram</a>`;
+                }
+                
+                // Если в строке есть хотя бы 5 цифр — считаем это телефоном
+                const digits = contactRaw.replace(/\D/g, '');
+                if (digits.length >= 5) {
+                    const waLink = `https://wa.me/${digits}?text=${encodeURIComponent('Привет! Это школа CHVRTK. Вы оставляли заявку...')}`;
+                    contactButtons += `
+                        <a href="${waLink}" target="_blank" class="btn-wa">WhatsApp</a>
+                        <a href="tel:${digits}" style="text-decoration:none; font-size:18px">📞</a>
+                    `;
+                }
+
+                return `
+                <tr>
+                    <td><small>${new Date(l.timestamp).toLocaleString('ru-RU', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'})}</small></td>
+                    <td><b>${l.name}</b><br><small style="color:var(--text-muted)">${l.form_type}</small></td>
+                    <td>
+                        <div style="display:flex; gap:10px; align-items:center">
+                            ${contactButtons || '<small style="color:gray">Нет данных</small>'}
+                        </div>
+                        <div style="font-size:11px; margin-top:4px; color:var(--text-muted)">${contactRaw}</div>
+                    </td>
+                    <td><small>${l.goal || '-'}</small></td>
+                    <td>
+                        <select onchange="updateStatus('${l.id}', this.value)" class="st-select st-${l.status}">
+                            <option value="NEW" ${l.status==='NEW'?'selected':''}>Новый</option>
+                            <option value="PROCESS" ${l.status==='PROCESS'?'selected':''}>В работе</option>
+                            <option value="WAIT" ${l.status==='WAIT'?'selected':''}>Ожидание</option>
+                            <option value="PAID" ${l.status==='PAID'?'selected':''}>Оплачено</option>
+                            <option value="CANCEL" ${l.status==='CANCEL'?'selected':''}>Отказ</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" value="${l.comments || ''}" onblur="updateComment('${l.id}', this.value)" 
+                               placeholder="..." style="width:100%; border:none; border-bottom:1px solid #eee; background:transparent">
+                    </td>
+                    <td>
+                        ${isAdmin ? `<button class="btn btn-del" onclick="delLead('${l.id}')">🗑</button>` : `<small>🔐</small>`}
+                    </td>
+                </tr>
+            `}).join('');
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            const newCount = leads.filter(l => l.status === 'NEW').length;
+            const paidCount = leads.filter(l => l.status === 'PAID').length;
+            const processCount = leads.filter(l => l.status === 'PROCESS').length;
+
+            document.getElementById('statsRow').innerHTML = `
+                <div class="stat-box">
+                    <div class="stat-val">${newCount}</div>
+                    <div class="stat-label">Новые заявки</div>
+                </div>
+                <div class="stat-box" style="border-color: var(--warning)">
+                    <div class="stat-val">${processCount}</div>
+                    <div class="stat-label">В обработке</div>
+                </div>
+                <div class="stat-box" style="border-color: var(--success)">
+                    <div class="stat-val">${paidCount}</div>
+                    <div class="stat-label">Оплачено</div>
+                </div>
+            `;
+        }
+
+        async function updateStatus(id, status) {
+            const l = leads.find(x => x.id === id);
+            await sendUpdate(id, status, l.comments);
+        }
+
+        async function updateComment(id, comments) {
+            const l = leads.find(x => x.id === id);
+            if(l.comments === comments) return;
+            await sendUpdate(id, l.status, comments);
+        }
+
+        async function sendUpdate(id, status, comments) {
+            await fetch(`${API_URL}/update-lead`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `${currentUser}:${currentPass}` },
+                body: JSON.stringify({ id, status, comments })
+            });
+            loadLeads();
+        }
+
+        async function delLead(id) {
+            if(!confirm('Удалить ученика из базы?')) return;
+            await fetch(`${API_URL}/delete-lead`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `${currentUser}:${currentPass}` },
+                body: JSON.stringify({ id })
+            });
+            loadLeads();
+        }
+    </script>
+</body>
+</html>

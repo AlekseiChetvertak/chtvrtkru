@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHVRTK | OS Admin Experience</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --glass-bg: rgba(0, 0, 0, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --accent: #007AFF;
+            --accent-glow: rgba(0, 122, 255, 0.4);
+            --danger: #ff3b30;
+            --success: #34c759;
+            --warning: #ff9f0a;
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; outline: none; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: #000;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1.5s ease;
+            z-index: -1;
+            filter: brightness(0.8);
+        }
+        #bg1 { background-image: url('https://images.unsplash.com/photo-1473800447596-01729482b8eb?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); opacity: 1; }
+        #bg2 { background-image: url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?auto=format&fit=crop&w=1920&q=80'); opacity: 0; }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .glass-card.visible { opacity: 1; transform: translateY(0); }
+
+        .login-box { width: 100%; max-width: 420px; padding: 60px; text-align: center; }
+
+        .logo-text { font-size: 34px; font-weight: 800; letter-spacing: -2px; margin-bottom: 40px; }
+        .logo-text span { color: var(--accent); }
+
+        .admin-app { width: 100%; max-width: 1300px; display: none; }
+        .main-panel { width: 100%; padding: 40px; margin-bottom: 60px; }
+
+        .table-wrap { width: 100%; overflow-x: auto; margin-top: 30px; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
+        th { text-align: left; padding: 0 20px 10px; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
+        td { padding: 18px 20px; background: rgba(255, 255, 255, 0.03); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); font-size: 14px; }
+        td:first-child { border-left: 1px solid var(--glass-border); border-radius: 16px 0 0 16px; }
+        td:last-child { border-right: 1px solid var(--glass-border); border-radius: 0 16px 16px 0; }
+
+        input, select { background: rgba(255, 255, 255, 0.08); border: 1px solid var(--glass-border); color: white; padding: 12px 16px; border-radius: 12px; transition: 0.3s; }
+        input:focus { border-color: var(--accent); }
+
+        .btn { padding: 14px 28px; border-radius: 18px; font-weight: 700; cursor: pointer; transition: 0.3s; background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid var(--glass-border); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+        .btn-primary { background: var(--accent); border: none; }
+
+        .contact-cell { display: flex; align-items: center; gap: 8px; }
+        .social-btn { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 11px; font-weight: 800; border: 1px solid var(--glass-border); }
+        .wa { color: var(--success); } .tg { color: var(--accent); }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; width: 100%; }
+        .stat-card { padding: 30px; text-align: center; }
+        .stat-val { font-size: 48px; font-weight: 800; margin: 5px 0; }
+
+        @keyframes fadeInRow { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        .scroll-hint { position: absolute; bottom: 30px; opacity: 0.4; animation: bounce 2s infinite; cursor: pointer; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body>
+
+    <div id="bg1" class="bg-layer"></div>
+    <div id="bg2" class="bg-layer"></div>
+
+    <section class="section" id="pageLogin">
+        <div class="glass-card login-box" id="cardLogin">
+            <div class="logo-text">CHVRTK<span>.OS</span></div>
+            <div style="text-align: left; margin-bottom: 20px;">
+                <label style="font-size: 10px; text-transform: uppercase; opacity: 0.5;">ID Сотрудника</label>
+                <input type="text" id="user" placeholder="Логин" style="width: 100%; margin-top: 8px;" value="admin">
+            </div>
+            <div style="text-align: left; margin-bottom: 35px;">
+                <label style="font-size: 10px; text-transform: uppercase; opacity: 0.5;">Пароль</label>
+                <input type="password" id="pass" placeholder="••••••••" style="width: 100%; margin-top: 8px;">
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="doLogin()">Войти в систему</button>
+        </div>
+    </section>
+
+    <div id="appContainer" class="admin-app">
+        <section class="section">
+            <div class="glass-card main-panel" id="cardTable">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px;">
+                    <div>
+                        <h1 style="margin: 0; font-size: 32px; font-weight: 800;">Заявки</h1>
+                        <p style="color: var(--text-dim); margin: 5px 0 0;">Оперативное управление базой</p>
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <input type="text" id="search" placeholder="Поиск..." oninput="renderTable()" style="width: 250px;">
+                        <button class="btn" onclick="location.reload()" style="border-color: var(--danger); color: var(--danger);">Выход</button>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Студент</th>
+                                <th>Контакты</th>
+                                <th>Цель</th>
+                                <th>Статус</th>
+                                <th>Заметка</th>
+                                <th id="adminAction"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="scroll-hint" onclick="window.scrollTo(0, window.innerHeight)">Аналитика ↓</div>
+        </section>
+
+        <section class="section">
+            <h2 style="font-size: 38px; margin-bottom: 40px;" data-aos="fade-right">Статистика потока</h2>
+            <div class="stats-grid">
+                <div class="glass-card stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <span style="color: var(--warning); font-size: 10px; font-weight: 700;">НОВЫЕ</span>
+                    <div id="stat-new" class="stat-val">0</div>
+                    <div id="bar-new" style="height:3px; background: var(--warning); width: 0%; transition: 1s; border-radius: 2px;"></div>
+                </div>
+                <div class="glass-card stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <span style="color: var(--accent); font-size: 10px; font-weight: 700;">В РАБОТЕ</span>
+                    <div id="stat-proc" class="stat-val">0</div>
+                    <div id="bar-proc" style="height:3px; background: var(--accent); width: 0%; transition: 1s; border-radius: 2px;"></div>
+                </div>
+                <div class="glass-card stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <span style="color: var(--success); font-size: 10px; font-weight: 700;">ОПЛАЧЕНО</span>
+                    <div id="stat-paid" class="stat-val">0</div>
+                    <div id="bar-paid" style="height:3px; background: var(--success); width: 0%; transition: 1s; border-radius: 2px;"></div>
+                </div>
+                <div class="glass-card stat-card" data-aos="fade-up" data-aos-delay="400">
+                    <span style="color: var(--danger); font-size: 10px; font-weight: 700;">ОТКАЗЫ</span>
+                    <div id="stat-cancel" class="stat-val">0</div>
+                    <div id="bar-cancel" style="height:3px; background: var(--danger); width: 0%; transition: 1s; border-radius: 2px;"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        const API = 'https://d5d34ggl6saovpdajhps.a6hc9vya.apigw.yandexcloud.net';
+        let leadsData = [], userRole = '', authUser = '', authPass = '';
+        let isEditing = false;
+
+        window.onload = () => {
+            AOS.init({ duration: 1000 });
+            document.getElementById('cardLogin').classList.add('visible');
+        };
+
+        window.addEventListener('scroll', () => {
+            const ratio = window.scrollY / window.innerHeight;
+            document.getElementById('bg2').style.opacity = Math.min(ratio * 1.5, 1);
+            document.getElementById('bg1').style.opacity = 1 - Math.min(ratio * 1.5, 1);
+        });
+
+        async function doLogin() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            try {
+                const res = await fetch(`${API}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: u, password: p })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    authUser = u; authPass = p; userRole = data.user.role;
+                    document.getElementById('pageLogin').style.display = 'none';
+                    document.getElementById('appContainer').style.display = 'block';
+                    document.getElementById('cardTable').classList.add('visible');
+                    loadData();
+                } else alert('Ошибка входа');
+            } catch (e) { alert('Ошибка сети'); }
+        }
+
+        async function loadData() {
+            if (isEditing) return;
+            try {
+                const res = await fetch(`${API}/list-leads`, {
+                    headers: { 'Authorization': `${authUser}:${authPass}` }
+                });
+                const data = await res.json();
+                leadsData = Array.isArray(data) ? data : [];
+                renderTable();
+                updateAnalytics();
+            } catch (e) { console.error('Load error'); }
+        }
+
+        function renderTable() {
+            if (isEditing) return; 
+            const body = document.getElementById('tableBody');
+            const query = document.getElementById('search').value.toLowerCase();
+            const isAdmin = userRole === 'admin';
+            
+            const filtered = leadsData.filter(l => 
+                (l.name || '').toLowerCase().includes(query) || (l.phone || '').includes(query)
+            );
+
+            body.innerHTML = filtered.map((l, i) => {
+                const phone = (l.phone || '').trim();
+                const digits = phone.replace(/\D/g, '');
+                let btns = '';
+                if (digits.length > 5) btns += `<a href="https://wa.me/${digits}" target="_blank" class="social-btn wa">W</a>`;
+                if (phone.includes('@')) btns += `<a href="https://t.me/${phone.replace('@','')}" target="_blank" class="social-btn tg">T</a>`;
+
+                return `
+                    <tr style="animation: fadeInRow 0.4s ease ${i * 0.03}s forwards; opacity: 0;">
+                        <td><small style="opacity:0.3">${l.timestamp ? new Date(l.timestamp).toLocaleDateString() : '—'}</small></td>
+                        <td><div style="font-weight:700;">${l.name || '—'}</div><div style="font-size:10px; opacity:0.3;">${l.form_type || 'WEB'}</div></td>
+                        <td><div class="contact-cell"><span style="font-family:monospace; opacity:0.7;">${phone}</span>${btns}</div></td>
+                        <td><div style="max-width:180px; font-size:11px; opacity:0.6;">${l.goal || '—'}</div></td>
+                        <td>
+                            <select onchange="changeStatus('${l.id}', this.value)" style="font-weight:700; font-size:10px; color:var(--accent);">
+                                <option value="NEW" ${l.status==='NEW'?'selected':''}>НОВЫЙ</option>
+                                <option value="PROCESS" ${l.status==='PROCESS'?'selected':''}>В РАБОТЕ</option>
+                                <option value="PAID" ${l.status==='PAID'?'selected':''}>ОПЛАЧЕНО</option>
+                                <option value="CANCEL" ${l.status==='CANCEL'?'selected':''}>ОТКАЗ</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" value="${l.comments || ''}" 
+                                    onfocus="isEditing=true" 
+                                    onblur="changeComment('${l.id}', this.value)" 
+                                    placeholder="..." style="width:120px; font-size:11px; background:none; border:none; border-bottom:1px solid rgba(255,255,255,0.1); border-radius:0;">
+                        </td>
+                        <td>${isAdmin ? `<button onclick="deleteLead('${l.id}')" style="background:none; border:none; cursor:pointer; opacity:0.3;">🗑</button>` : ''}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateAnalytics() {
+            const c = { NEW: 0, PROCESS: 0, PAID: 0, CANCEL: 0 };
+            leadsData.forEach(l => { if(c[l.status] !== undefined) c[l.status]++; });
+            const total = leadsData.length || 1;
+            
+            const map = { 'new': c.NEW, 'proc': c.PROCESS, 'paid': c.PAID, 'cancel': c.CANCEL };
+            for (let key in map) {
+                document.getElementById('stat-' + key).innerText = map[key];
+                document.getElementById('bar-' + key).style.width = (map[key] / total * 100) + '%';
+            }
+        }
+
+        async function changeStatus(id, status) {
+            if (status === 'PAID') confetti({ particleCount: 150, spread: 70, origin: { y: 0.7 } });
+            await apiUpdate({ id, status });
+        }
+
+        async function changeComment(id, comments) {
+            await apiUpdate({ id, comments });
+        }
+
+        async function apiUpdate(payload) {
+            try {
+                const res = await fetch(`${API}/update-lead`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        'Authorization': `${authUser}:${authPass}` 
+                    },
+                    body: JSON.stringify(payload)
+                });
+                if (res.ok) {
+                    setTimeout(() => {
+                        isEditing = false;
+                        loadData();
+                    }, 100);
+                } else {
+                    isEditing = false;
+                }
+            } catch (e) {
+                isEditing = false;
+                console.error('Update failed', e);
+            }
+        }
+
+        async function deleteLead(id) {
+            if (confirm('Удалить?')) {
+                await fetch(`${API}/delete-lead`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `${authUser}:${authPass}` },
+                    body: JSON.stringify({ id })
+                });
+                loadData();
+            }
+        }
+
+        setInterval(() => {
+            if (!isEditing) {
+                loadData();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
