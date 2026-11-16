@@ -1,12 +1,12 @@
 /* ================= HERO SECTION ================= */
 .hero {
-  min-height: 100svh;
+  min-height: calc(100svh - 60px);
   position: relative;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
   gap: 20px;
-  padding: 70px 0 90px;
+  padding: 56px 0 90px;
 }
 
 .hero-title {
@@ -50,7 +50,7 @@
 
 .hint {
   font-size: 10px;
-  color: #78847d;
+  color: var(--muted);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -68,7 +68,7 @@
   position: absolute;
   width: min(450px, 100%);
   aspect-ratio: 1;
-  border: 1px solid rgba(0, 212, 161, 0.14);
+  border: 1px solid rgba(168, 0, 0, 0.26);
   border-radius: 50%;
   transform: rotate(-24deg);
   animation: orbit 24s linear infinite;
@@ -79,13 +79,13 @@
   content: "";
   position: absolute;
   inset: 35px;
-  border: 1px solid rgba(113, 140, 255, 0.15);
+  border: 1px solid rgba(244, 243, 241, 0.1);
   border-radius: 50%;
 }
 
 .orbit::after {
   inset: 82px;
-  border-color: rgba(0, 212, 161, 0.1);
+  border-color: rgba(168, 0, 0, 0.18);
 }
 
 .orbit-dot {
@@ -95,8 +95,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--mint);
-  box-shadow: 0 0 25px var(--mint);
+  background-color: var(--accent-bright);
+  box-shadow: 0 0 25px var(--accent-bright);
 }
 
 @keyframes orbit {
@@ -109,10 +109,10 @@
   width: min(350px, 88%);
   padding: 29px;
   position: relative;
-  border: 1px solid rgba(230, 241, 233, 0.17);
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(244, 243, 241, 0.16);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.01));
   backdrop-filter: blur(18px);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.53);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
   transform: rotate(3deg);
   animation: float 6s ease-in-out infinite;
 }
@@ -132,7 +132,7 @@
 .card-foot {
   display: flex;
   justify-content: space-between;
-  color: #89968e;
+  color: var(--muted);
   font-size: 9px;
   letter-spacing: 0.17em;
   text-transform: uppercase;
@@ -156,7 +156,7 @@
   width: 3px;
   height: var(--h);
   border-radius: 3px;
-  background: linear-gradient(to top, var(--blue), var(--mint));
+  background: linear-gradient(to top, #3f3f46, var(--accent-bright));
   animation: wave 1.5s ease-in-out infinite alternate;
   animation-delay: var(--d);
 }
@@ -182,7 +182,7 @@
   position: absolute;
   bottom: 28px;
   left: 0;
-  color: #718078;
+  color: #76757a;
   font-size: 9px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -195,7 +195,7 @@
   content: "";
   width: 38px;
   height: 1px;
-  background-color: #65736b;
+  background-color: #52525b;
 }
 
 /* ================= SPACES SECTION ================= */
@@ -263,7 +263,7 @@
   bottom: -1px;
   width: 0;
   height: 1px;
-  background-color: var(--mint);
+  background-color: var(--accent-bright);
   transition: width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -279,7 +279,7 @@
   grid-column: 1;
   grid-row: 1;
   font-size: 9px;
-  color: #87948c;
+  color: var(--muted);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -300,19 +300,19 @@
   grid-row: 3;
   margin: 8px 0 0;
   font-size: 11px;
-  color: #78847d;
+  color: #76757a;
   letter-spacing: 0.015em;
   line-height: 1.5;
 }
 
 .portal-sub {
-  color: #aab5ae;
+  color: #a1a1aa;
 }
 
 .portal-arrow {
   grid-column: 2;
   grid-row: 1 / 4;
-  color: var(--mint);
+  color: var(--accent-bright);
   font-size: 21px;
   transition: transform 0.3s ease;
 }
@@ -349,8 +349,8 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(0, 212, 161, 0.08) 0%,
-    rgba(113, 140, 255, 0.03) 35%,
+    rgba(168, 0, 0, 0.14) 0%,
+    rgba(244, 243, 241, 0.02) 35%,
     transparent 70%
   );
   pointer-events: none;
@@ -402,12 +402,12 @@
   font-size: clamp(10px, 1.2vw, 13px);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #a2afa7;
+  color: #a1a1aa;
   position: relative;
 }
 
 .brand-tag b {
-  color: var(--mint);
+  color: var(--accent-bright);
   font-weight: 500;
 }
 
@@ -421,7 +421,7 @@
 
   .hero {
     grid-template-columns: 1fr;
-    padding: 75px 0 65px;
+    padding: 56px 0 65px;
     gap: 5px;
   }
 
