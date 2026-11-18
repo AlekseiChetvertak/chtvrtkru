@@ -383,7 +383,34 @@ document.addEventListener('DOMContentLoaded', () => {
       'it.end.sub': 'Подготовьтесь представлять свою экспертизу без границ. Make Them Hear YOU.',
       'it.end.cta': 'Подать заявку на программу <span aria-hidden="true">↗</span>',
       'it.end.diag': 'Проверить уровень английского →',
-      'it.footer': 'Подготовка к международным IT-интервью'
+      'it.footer': 'Подготовка к международным IT-интервью',
+      'it.nav.edition': 'Состав',
+      'it.hero.avail': 'Индивидуально и мини-группы · Набор открыт',
+      'it.box.edition': 'Комплексная подготовка к техническим и behavioral-интервью',
+      'it.box.format': 'Живые сессии + Mock-интервью',
+      'it.box.access': 'Зачисление через диагностику',
+      'it.ed.label': '08 / Спецификация программы',
+      'it.ed.title': 'Что внутри.<br><span class="text-accent">Как начать.</span>',
+      'it.ed.status': 'ОТКРЫТ НАБОР НА ПОТОК',
+      'it.ed.pkgTitle': 'Что входит в программу',
+      'it.ed.i1.t': '01. Входная диагностика и калибровка трека',
+      'it.ed.i1.d': 'Оценка беглости речи, технической аргументации и требований под вашу целевую роль.',
+      'it.ed.i2.t': '02. Основные тренировочные сессии',
+      'it.ed.i2.d': 'Структурная живая практика: самопрезентация, кейсы по STAR и разбор архитектуры.',
+      'it.ed.i3.t': '03. Полноценные Mock-интервью',
+      'it.ed.i3.d': '45-минутные симуляции с жёсткими уточняющими вопросами и подробным разбором записи.',
+      'it.ed.i4.t': '04. Персональный Playbook и банк историй',
+      'it.ed.i4.d': 'Отточенный питч на 90 секунд, упакованные кейсы проектов и шаблоны аргументации под ваш стек.',
+      'it.ed.howKicker': 'КАК ЗАПИСАТЬСЯ',
+      'it.ed.howTitle': 'Три шага до старта.',
+      'it.ed.s1.t': 'Оставьте заявку',
+      'it.ed.s1.d': 'Напишите нам вашу целевую роль, стек и желаемые сроки.',
+      'it.ed.s2.t': '20-минутная диагностика',
+      'it.ed.s2.d': 'Оцениваем текущий уровень коммуникации, подбираем формат и фиксируем стоимость.',
+      'it.ed.s3.t': 'Бронь места и старт',
+      'it.ed.s3.d': 'Оформляете участие и начинаете первый спринт подготовки.',
+      'it.ed.cta': 'Записаться на диагностику <span aria-hidden="true">↗</span>',
+      'it.ed.note': 'Индивидуальный и групповой форматы · Стоимость фиксируется после диагностики'
     }
   };
 
@@ -699,4 +726,21 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', () => setTimeout(() => renderSample(currentSampleKey), 190));
     });
   }
+
+  /* 10. Tangible Product Box Subtle 3D Tilt (v2) */
+  const productBox = document.getElementById('productBox');
+  if (productBox && !prefersReducedMotion) {
+    productBox.addEventListener('mousemove', (e) => {
+      const rect = productBox.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      productBox.style.transform = `rotateY(${(x * 10).toFixed(1)}deg) rotateX(${(-y * 10).toFixed(1)}deg)`;
+    });
+    productBox.addEventListener('mouseleave', () => {
+      productBox.style.transform = '';
+    });
+  }
+
+
+
 });

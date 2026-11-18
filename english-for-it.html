@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#09090b">
-  <title>English for IT — CHVRTK</title>
+  <title>English for IT — CHVRTK (Edition Preview)</title>
   <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/english-for-it.css">
+  <link rel="stylesheet" href="styles/english-for-it-v2.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
         <a href="#stages" data-i18n="it.nav.stages">Interview</a>
         <a href="#program" data-i18n="it.nav.program">Program</a>
         <a href="#sample" data-i18n="it.nav.sample">Sample</a>
-        <a href="#faq" data-i18n="it.nav.faq">FAQ</a>
+        <a href="#edition" data-i18n="it.nav.edition">Package</a>
 
         <div class="lang-switch" data-lang="en" role="group" aria-label="Language switcher">
           <span class="lang-pill" aria-hidden="true"></span>
@@ -28,15 +28,14 @@
           <button type="button" class="lang-btn" data-set-lang="ru">RU</button>
         </div>
 
-        <a class="header-cta" href="#apply" data-i18n="it.nav.cta">Apply ↗</a>
+        <a class="header-cta" href="#edition" data-i18n="it.nav.cta">Enroll ↗</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- 01 / HERO -->
+    <!-- 01 / HERO WITH TANGIBLE PRODUCT ARTIFACT -->
     <section class="it-hero" id="top">
-      <!-- Subtle Architectural Night Parallax Backdrop -->
       <div class="hero-backdrop" aria-hidden="true">
         <div class="night-grid"></div>
         <div class="night-beam beam-1"></div>
@@ -49,27 +48,70 @@
           <span class="hero-code">ENGLISH FOR IT · INTERVIEW PREP</span>
         </div>
 
-        <div class="it-hero-center">
-          <h1 class="it-title" id="itTitle">
-            <span class="it-line line-1" data-i18n="it.hero.t1">Your expertise.</span>
-            <span class="it-line line-2 text-accent" data-i18n="it.hero.t2">In their language.</span>
-          </h1>
-          <p class="it-subtitle hero-fade" data-i18n="it.hero.sub">
-            Structured interview preparation for IT professionals pursuing international careers.
-          </p>
-        </div>
+        <div class="it-hero-stage">
+          <!-- Left: Editorial Hook & Action -->
+          <div class="it-hero-copy">
+            <h1 class="it-title" id="itTitle">
+              <span class="it-line line-1" data-i18n="it.hero.t1">Your expertise.</span>
+              <span class="it-line line-2 text-accent" data-i18n="it.hero.t2">In their language.</span>
+            </h1>
 
-        <div class="it-hero-bottom hero-fade">
-          <a class="cta magnetic-cta" href="#stages" data-i18n-html="it.hero.cta">
-            Explore the program <span aria-hidden="true">↘</span>
-          </a>
+            <p class="it-subtitle hero-fade" data-i18n="it.hero.sub">
+              Structured interview preparation program for IT professionals pursuing international careers.
+            </p>
 
-          <!-- Right-bottom Objective Card -->
-          <aside class="objective-card">
-            <span class="obj-label" data-i18n="it.obj.label">THE OBJECTIVE</span>
-            <strong class="obj-title" data-i18n="it.obj.title">Be ready to explain. Discuss. Defend.</strong>
-            <p class="obj-text" data-i18n="it.obj.text">Technical expertise is only part of the interview.</p>
-          </aside>
+            <div class="it-hero-cta-row hero-fade">
+              <a class="cta magnetic-cta" href="#edition" data-i18n-html="it.hero.cta">
+                See what's inside <span aria-hidden="true">↘</span>
+              </a>
+              <span class="hero-availability" data-i18n="it.hero.avail">
+                1-on-1 & Mini-Cohort · Enrollment Open
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: Tangible Product Artifact ("The Box") -->
+          <div class="product-artifact-wrap hero-fade">
+            <div class="product-box" id="productBox" aria-label="CHVRTK English for IT Program Package">
+              <div class="box-spine" aria-hidden="true">
+                <span>CHVRTK // SPEC-02</span>
+                <span>EDITION 2026</span>
+              </div>
+
+              <div class="box-face">
+                <div class="box-top-bar">
+                  <span class="box-brand">CHVRTK.RU</span>
+                  <span class="box-tag">PROGRAM PACKAGE</span>
+                </div>
+
+                <div class="box-core">
+                  <span class="box-kicker">INTERVIEW READINESS SYSTEM</span>
+                  <h2 class="box-name">
+                    ENGLISH<br>
+                    FOR IT<span class="text-accent">.</span>
+                  </h2>
+                  <p class="box-edition" data-i18n="it.box.edition">
+                    Complete Technical & Behavioral Interview Prep
+                  </p>
+                </div>
+
+                <div class="box-manifest">
+                  <div class="manifest-row">
+                    <span>TRACKS</span>
+                    <strong>FE · BE · ML · QA · PM</strong>
+                  </div>
+                  <div class="manifest-row">
+                    <span>FORMAT</span>
+                    <strong data-i18n="it.box.format">Live Sessions + Mock Interviews</strong>
+                  </div>
+                  <div class="manifest-row">
+                    <span>ACCESS</span>
+                    <strong data-i18n="it.box.access">Direct Enrollment via Diagnostic</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -399,7 +441,90 @@
       </div>
     </section>
 
-    <!-- 08 / FINAL CTA -->
+    <!-- 08 / PROGRAM SPECIFICATION & ENROLLMENT ("WHAT'S IN THE BOX") -->
+    <section class="it-section" id="edition">
+      <div class="shell">
+        <div class="scrub-item" data-scrub="left">
+          <p class="section-label" data-i18n="it.ed.label">08 / Program Specification</p>
+          <h2 class="it-heading" data-i18n-html="it.ed.title">
+            What you get.<br>
+            <span class="text-accent">How it starts.</span>
+          </h2>
+        </div>
+
+        <div class="edition-grid">
+          <!-- Left: Inside the Package -->
+          <div class="package-box scrub-item" data-scrub="up">
+            <div class="pkg-header">
+              <span class="pkg-code">CHVRTK // ENGLISH FOR IT</span>
+              <span class="pkg-status" data-i18n="it.ed.status">AVAILABLE FOR ENROLLMENT</span>
+            </div>
+
+            <h3 class="pkg-title" data-i18n="it.ed.pkgTitle">Included in the program</h3>
+
+            <ul class="pkg-list">
+              <li>
+                <strong data-i18n="it.ed.i1.t">01. Initial Diagnostic & Track Calibration</strong>
+                <span data-i18n="it.ed.i1.d">Baseline assessment of your speaking fluency, technical articulation, and target role requirements.</span>
+              </li>
+              <li>
+                <strong data-i18n="it.ed.i2.t">02. Core Interview Training Sessions</strong>
+                <span data-i18n="it.ed.i2.d">Structured live training covering self-presentation, STAR behavioral stories, and system/code discussions.</span>
+              </li>
+              <li>
+                <strong data-i18n="it.ed.i3.t">03. Full-Scale Mock Interviews</strong>
+                <span data-i18n="it.ed.i3.d">45-minute realistic simulations with senior-level follow-up pressure and recorded debriefs.</span>
+              </li>
+              <li>
+                <strong data-i18n="it.ed.i4.t">04. Personal Playbook & Story Bank</strong>
+                <span data-i18n="it.ed.i4.d">Polished 90-second pitch, refined project narratives, and structured answers tailored to your stack.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right: How to Enroll / Purchase Flow -->
+          <div class="enroll-card scrub-item" data-scrub="up">
+            <div>
+              <span class="enroll-kicker" data-i18n="it.ed.howKicker">HOW TO ENROLL</span>
+              <h3 class="enroll-title" data-i18n="it.ed.howTitle">Three steps to start.</h3>
+
+              <ol class="enroll-steps">
+                <li>
+                  <span class="step-idx">01</span>
+                  <div>
+                    <strong data-i18n="it.ed.s1.t">Submit an application</strong>
+                    <p data-i18n="it.ed.s1.d">Message us your target role, stack, and timeline.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="step-idx">02</span>
+                  <div>
+                    <strong data-i18n="it.ed.s2.t">20-minute diagnostic call</strong>
+                    <p data-i18n="it.ed.s2.d">We assess your current communication level and confirm format & tuition.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="step-idx">03</span>
+                  <div>
+                    <strong data-i18n="it.ed.s3.t">Reserve your spot & begin</strong>
+                    <p data-i18n="it.ed.s3.d">Complete enrollment and start your first preparation sprint.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="enroll-cta-block">
+              <a class="cta magnetic-cta" href="https://t.me/chvrtk" target="_blank" rel="noopener noreferrer" data-i18n-html="it.ed.cta">
+                Enroll / Book Diagnostic <span aria-hidden="true">↗</span>
+              </a>
+              <span class="enroll-note" data-i18n="it.ed.note">Individual & Small-Group Formats · Tuition confirmed after diagnostic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 / FINAL CTA & BRAND FINALE -->
     <section class="it-final" id="apply">
       <div class="shell final-box scrub-item" data-scrub="up">
         <p class="section-label">CHVRTK.RU / ENGLISH FOR IT</p>
