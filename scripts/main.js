@@ -410,7 +410,13 @@ document.addEventListener('DOMContentLoaded', () => {
       'it.ed.s3.t': 'Бронь места и старт',
       'it.ed.s3.d': 'Оформляете участие и начинаете первый спринт подготовки.',
       'it.ed.cta': 'Записаться на диагностику <span aria-hidden="true">↗</span>',
-      'it.ed.note': 'Индивидуальный и групповой форматы · Стоимость фиксируется после диагностики'
+      'it.ed.note': 'Индивидуальный и групповой форматы · Стоимость фиксируется после диагностики',
+      'cta.m1': 'Четыре места.',
+      'cta.m2': '10 недель.',
+      'cta.m3': 'Один поток.',
+      'cta.seatTitle': 'ЗАЙМИ<br>СВОЁ <span class="text-accent">МЕСТО.</span>',
+      'cta.seatNote': 'Не курс в записи. Забронированное кресло за столом на 10 недель живой практики.',
+      'cta.btn': 'ЗАБРОНИРОВАТЬ МЕСТО <span aria-hidden="true">↗</span>',
     }
   };
 
@@ -739,6 +745,22 @@ document.addEventListener('DOMContentLoaded', () => {
     productBox.addEventListener('mouseleave', () => {
       productBox.style.transform = '';
     });
+  }
+
+  /* 11. Seat CTA Depth Parallax */
+  const seatComp = document.querySelector('.seat-composition');
+  const seatTitle = document.getElementById('seatTitle');
+  const seatFigure = document.getElementById('seatFigure');
+  if (seatComp && seatTitle && seatFigure && !prefersReducedMotion) {
+    window.addEventListener('scroll', () => {
+      const rect = seatComp.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.top < vh && rect.bottom > 0) {
+        const offset = (vh / 2 - (rect.top + rect.height / 2)) / vh;
+        seatTitle.style.transform = `translate3d(0, calc(-14% + ${(offset * 38).toFixed(1)}px), 0)`;
+        seatFigure.style.transform = `translate3d(0, calc(10% + ${(offset * -18).toFixed(1)}px), 0)`;
+      }
+    }, { passive: true });
   }
 
 

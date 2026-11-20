@@ -459,50 +459,136 @@
   max-width: 520px;
 }
 
-/* ================= 09. FINAL CTA & BRAND FINALE ================= */
-.final-cta {
-  padding: 140px 0 110px;
+/* ================= 09. SEAT METAPHOR CTA ================= */
+.seat-cta {
+  padding: 130px 0 110px;
   border-top: 1px solid var(--line);
   position: relative;
   overflow: hidden;
+  background: radial-gradient(circle at 50% 42%, #131317 0%, var(--bg) 68%);
 }
 
-.final-cta::before {
-  content: "";
-  position: absolute;
-  width: 65vw;
-  height: 65vw;
-  max-width: 820px;
-  max-height: 820px;
-  right: -10%;
-  top: 5%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(168, 0, 0, 0.16) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.final-title {
-  font-size: clamp(56px, 10vw, 140px);
-  line-height: 0.86;
-  letter-spacing: -0.075em;
-  font-weight: 700;
-  margin: 24px 0 36px;
+.seat-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 4;
 }
 
 .final-meta {
   display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
   font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 44px;
+}
+
+/* Layered Depth Stage */
+/* Сцена с идеальным балансом слоев */
+.seat-composition {
+  position: relative;
+  min-height: 520px; /* Фиксируем комфортную высоту сцены */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 40px;
+  overflow: hidden;
+}
+
+/* Layer 2: Giant Poster Typography BEHIND the chair */
+/* Заголовок позади кресла */
+.seat-backdrop-title {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(64px, 14vw, 180px); /* Масштабируемый размер букв */
+  line-height: 0.82;
+  letter-spacing: -0.075em;
+  font-weight: 700;
+  user-select: none;
+  width: 100%;
+}
+
+/* Layer 3: Cutout Chair IN FRONT of the typography */
+/* Контейнер кресла с точным контролем размеров через код */
+.seat-figure {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 280px; /* <--- ИДЕАЛЬНЫЙ БАЛАНС: меняй это число (например, 420px или 500px) */
+  margin: 0 auto;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.seat-backlight {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 0, 0, 0.32) 0%, transparent 70%);
+  filter: blur(32px);
+  z-index: -1;
+}
+
+/* Картинка подстраивается под контейнер без искажений */
+.seat-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 40px rgba(0, 0, 0, 0.95));
+}
+
+/* Action Bar below */
+.seat-action-bar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  padding-top: 24px;
+}
+
+.seat-note {
+  margin: 0;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.5;
+  color: #d4d3d0;
+  max-width: 480px;
 }
 
 .final-btn {
-  padding: 20px 30px;
+  padding: 20px 34px;
   font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .seat-cta {
+    padding: 96px 0 84px;
+  }
+
+  .seat-composition {
+    min-height: 340px;
+  }
+
+  .seat-backdrop-title {
+    transform: translateY(-22%);
+  }
+
+  .seat-figure {
+    width: 88vw;
+    transform: translateY(12%);
+  }
 }
 
 /* Monumental CHVRTK Finale */
